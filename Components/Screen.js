@@ -1,15 +1,40 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Dimensions, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import MapboxGL from '@react-native-mapbox-gl/maps';
-const Token="pk.eyJ1Ijoic2F5ZW01NTIyIiwiYSI6ImNremZxdDFjbzNraTIydm8ydmY4enljb3EifQ.-Tm4Vg6gLHSqEVjOmEWhjA"
-MapboxGL.setAccessToken(Token);
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
+import HomeScreen from '../Screen/HomeScreen';
+import LocationScreen from '../Screen/LocationScreen';
+import ProfileScreen from '../Screen/ProfileScreen';
+const {width,height}=Dimensions.get('window');
+console.log(width,height)
+const TabBarStyle={
+  position: 'absolute',
+  backgroundColor: '#fff',
+  left:20,
+  right:20,
+  bottom:20,
+  height:height/11,
+  borderRadius:10,
+}
+const Tab = createBottomTabNavigator();
 const Screen = () => {
   return (
-    <View style={styles.page}>
-        <View style={styles.container}>
-          <MapboxGL.MapView style={styles.map} />
-        </View>
-      </View>
+    
+    <NavigationContainer>
+    <Tab.Navigator 
+    initialRouteName="Home"
+    screenOptions={{
+      headerShown:false,
+      tabBarStyle:TabBarStyle,
+    }}
+    >
+      <Tab.Screen name="HomeScreen" component={HomeScreen} />
+      <Tab.Screen name="LocationScreen" component={LocationScreen}   />
+      <Tab.Screen name="ProfileScreen" component={ProfileScreen}   />
+
+    </Tab.Navigator>
+  </NavigationContainer>
+  
   )
 }
 
