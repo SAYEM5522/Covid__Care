@@ -1,11 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Home from '../Components/HomeScreen/Home';
+const HomeStack = createNativeStackNavigator();
 const HomeScreen = () => {
   return (
-    <View>
-      <Text>HomeScreen</Text>
-    </View>
+    <HomeStack.Navigator>
+      <HomeStack.Screen name="Home" component={Home} />
+    </HomeStack.Navigator>
   )
 }
 
