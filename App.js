@@ -15,9 +15,6 @@ export default App;
 
 const styles = StyleSheet.create({
   hello:{
-    alignItems:'center',
-    justifyContent:'center',
-    display:'flex',
     flex:1
   },
  

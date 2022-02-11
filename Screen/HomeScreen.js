@@ -5,8 +5,8 @@ import Home from '../Components/HomeScreen/Home';
 const HomeStack = createNativeStackNavigator();
 const HomeScreen = () => {
   return (
-    <HomeStack.Navigator>
-      <HomeStack.Screen name="Home" component={Home} />
+    <HomeStack.Navigator >
+      <HomeStack.Screen name="Home" component={Home} options={{headerShown:false}} />
     </HomeStack.Navigator>
   )
 }

@@ -1,11 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Location from '../Components/LocationScreen/Location';
+const LocationStack = createNativeStackNavigator();
 const LocationScreen = () => {
   return (
-    <View>
-      <Text>HomeScreen</Text>
-    </View>
+    <LocationStack.Navigator>
+    <LocationStack.Screen name="Location" component={Location} options={{headerShown:false}} />
+    </LocationStack.Navigator>
   )
 }
 

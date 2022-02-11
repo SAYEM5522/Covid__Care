@@ -1,21 +1,12 @@
-import { Dimensions, StyleSheet, Text, View } from 'react-native'
+import { Dimensions, Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import HomeScreen from '../Screen/HomeScreen';
 import LocationScreen from '../Screen/LocationScreen';
 import ProfileScreen from '../Screen/ProfileScreen';
-const {width,height}=Dimensions.get('window');
-console.log(width,height)
-const TabBarStyle={
-  position: 'absolute',
-  backgroundColor: '#fff',
-  left:20,
-  right:20,
-  bottom:20,
-  height:height/11,
-  borderRadius:10,
-}
+import TabBar from './TabBar';
+
 const Tab = createBottomTabNavigator();
 const Screen = () => {
   return (
@@ -23,9 +14,10 @@ const Screen = () => {
     <NavigationContainer>
     <Tab.Navigator 
     initialRouteName="Home"
+    tabBar={props => <TabBar {...props}  />}
     screenOptions={{
       headerShown:false,
-      tabBarStyle:TabBarStyle,
+      // tabBarStyle:TabBarStyle,
     }}
     >
       <Tab.Screen name="HomeScreen" component={HomeScreen} />
