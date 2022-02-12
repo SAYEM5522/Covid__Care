@@ -4,7 +4,7 @@ const {width,height}=Dimensions.get('window');
 const styles = StyleSheet.create({
   TabBarStyle:{
    position: 'absolute',
-   backgroundColor: 'black',
+   backgroundColor: 'white',
    left:20,
    right:20,
    bottom:20,
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
 
 const TabBar = ({ state, descriptors, navigation }) => {
   return (
-    <View style={styles.TabBarStyle}>
+    <View style={styles.TabBarStyle} key={state.index}>
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
         const label =
@@ -59,7 +59,7 @@ const TabBar = ({ state, descriptors, navigation }) => {
             onLongPress={onLongPress}
             style={{ flex: 1 }}
           >
-            <Text style={{ color: isFocused ? '#fff' : '#222' }}>
+            <Text style={{ color: isFocused ? 'red' : '#222' }}>
               {label}
             </Text>
           </Pressable>
