@@ -18,7 +18,7 @@
     "react-freeze": "^1.0.0",
     "react-native": "0.67.2",
     "react-native-fast-image": "^8.5.11",
-    "react-native-gesture-handler": "^2.2.0",
+    "react-native-gesture-handler": "2.1.1",
     "react-native-haptic-feedback": "^1.13.0",
     "react-native-reanimated": "^2.4.1",
     "react-native-safe-area-context": "^3.3.2",

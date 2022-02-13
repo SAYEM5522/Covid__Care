@@ -6,7 +6,7 @@ const LocationStack = createNativeStackNavigator();
 const LocationScreen = () => {
   return (
     <LocationStack.Navigator>
-    <LocationStack.Screen name="Location" component={Location} options={{headerShown:false}} />
+    <LocationStack.Screen name="LocationScreen" component={Location} options={{headerShown:false}} />
     </LocationStack.Navigator>
   )
 }

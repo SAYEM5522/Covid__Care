@@ -56,6 +56,11 @@ const styles = StyleSheet.create({
     top:(height/3.2)-80*3,
     left:width/8
   },
+  LineChart:{
+    marginLeft:30,
+  
+
+  }
 
 })
 const Home = () => {
@@ -68,7 +73,7 @@ const Home = () => {
         <View style={styles.GraphLine3}/>
         <View style={styles.GraphLine4}/>
     <LineChart.Provider data={data}  >
-      <LineChart height={height/3} width={width-110} yGutter={20} style={{marginLeft:30}} >
+      <LineChart height={height/3} width={width-110} yGutter={20} style={styles.LineChart} >
       <LineChart.Path color="#FD5849" width={5}  >
       <LineChart.Gradient color="#6D1F44"  opacity={12}   />
     </LineChart.Path>

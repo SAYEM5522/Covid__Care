@@ -6,6 +6,7 @@ import HomeScreen from '../Screen/HomeScreen';
 import LocationScreen from '../Screen/LocationScreen';
 import ProfileScreen from '../Screen/ProfileScreen';
 import TabBar from './TabBar';
+import HealthStatus from './HealthStatusScreen/HealthStatus';
 
 const Tab = createBottomTabNavigator();
 const Screen = () => {
@@ -17,12 +18,13 @@ const Screen = () => {
     tabBar={props => <TabBar {...props}  />}
     screenOptions={{
       headerShown:false,
-      // tabBarStyle:TabBarStyle,
     }}
     >
-      <Tab.Screen name="HomeScreen" component={HomeScreen} />
-      <Tab.Screen name="LocationScreen" component={LocationScreen}   />
-      <Tab.Screen name="ProfileScreen" component={ProfileScreen}   />
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Health" component={HealthStatus}   />
+      <Tab.Screen name="Location" component={LocationScreen}   />
+      <Tab.Screen name="Profile" component={ProfileScreen}   />
+
 
     </Tab.Navigator>
   </NavigationContainer>

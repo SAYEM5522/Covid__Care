@@ -1,73 +1,50 @@
-import { StyleSheet, Text, View,Pressable, Dimensions } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View,Pressable, Dimensions,TouchableWithoutFeedback } from 'react-native'
+import React, { useCallback, useEffect, useState } from 'react'
+import Svg,{Path} from "react-native-svg";
+import Animated, { useAnimatedStyle, useDerivedValue, useSharedValue, withDelay, withSpring, withTiming } from 'react-native-reanimated';
+import BottomTab from './BottomTab';
 const {width,height}=Dimensions.get('window');
 const styles = StyleSheet.create({
   TabBarStyle:{
    position: 'absolute',
-   backgroundColor: 'white',
-   left:20,
-   right:20,
-   bottom:20,
-   height:height/12,
+   right:0,
+   bottom:30,
+   height:50,
+   width:70,
    borderRadius:10,
    flexDirection:'row',
    alignItems:'center',
+   backgroundColor:'#fff',
+   display:'flex',
  }
 })
 
 const TabBar = ({ state, descriptors, navigation }) => {
+  const AnimatedPressable=Animated.createAnimatedComponent(Pressable);
+  const open=useSharedValue(0);
+
+ 
+
+  const animatedstyle=useAnimatedStyle(()=>{
+    return{
+      width:open.value?withSpring(width-40):withSpring(70),
+      marginRight:open.value?20:0,
+    }
+  })
+
   return (
-    <View style={styles.TabBarStyle} key={state.index}>
-      {state.routes.map((route, index) => {
-        const { options } = descriptors[route.key];
-        const label =
-          options.tabBarLabel !== undefined
-            ? options.tabBarLabel
-            : options.title !== undefined
-            ? options.title
-            : route.name;
-
-        const isFocused = state.index === index;
-
-        const onPress = () => {
-          const event = navigation.emit({
-            type: 'tabPress',
-            target: route.key,
-            canPreventDefault: true,
-          });
-
-          if (!isFocused && !event.defaultPrevented) {
-            // The `merge: true` option makes sure that the params inside the tab screen are preserved
-            navigation.navigate({ name: route.name, merge: true });
-          }
-        };
-
-        const onLongPress = () => {
-          navigation.emit({
-            type: 'tabLongPress',
-            target: route.key,
-          });
-        };
-
-        return (
-          <Pressable
-            accessibilityRole="button"
-            accessibilityState={isFocused ? { selected: true } : {}}
-            accessibilityLabel={options.tabBarAccessibilityLabel}
-            testID={options.tabBarTestID}
-            onPress={onPress}
-            onLongPress={onLongPress}
-            style={{ flex: 1 }}
-          >
-            <Text style={{ color: isFocused ? 'red' : '#222' }}>
-              {label}
-            </Text>
-          </Pressable>
-        );
-      })}
-    </View>
+    <TouchableWithoutFeedback>
+    <Animated.View  key={state.index} style={[styles.TabBarStyle,animatedstyle]} >
+      <BottomTab state={state} descriptors={descriptors} navigation={navigation} />     
+    </Animated.View>
+    </TouchableWithoutFeedback>
+  
   );
 }
 
 export default TabBar
+
+
+
+
 
