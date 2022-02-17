@@ -1,11 +1,19 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import Animated, { useAnimatedStyle } from 'react-native-reanimated'
 
-const BottomTab = ({state,descriptors,navigation}) => {
+const BottomTab = ({state,descriptors,navigation,open}) => {
+  const AnimatedStyle=useAnimatedStyle(()=>{
+    return{
+      marginLeft:open?30:50,
+    }
+  })
   return (
-    <View style={{flexDirection:'row'}}>
-       {state.routes.map((route, index) => {
+    <Animated.View style={[{flexDirection:'row'},AnimatedStyle]}>
+       {
+       state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
+        
         const label =
           options.tabBarLabel !== undefined
             ? options.tabBarLabel
@@ -46,16 +54,19 @@ const BottomTab = ({state,descriptors,navigation}) => {
             style={{ flex: 1 }}
             key={state.routes[index].key}
           >
-          
-              <Text style={{ color: isFocused ? 'red' : '#222' }}>
-              {label}
-            </Text>
-           
-            
+          {
+            <Text style={{ color: isFocused ? 'red' : '#222' }}>
+             {
+               options.tabBarIcon({})
+             }
+          </Text>
+          }
+              
           </Pressable>
         );
-      })}
-    </View>
+      })
+      }
+    </Animated.View>
   )
 }
 
