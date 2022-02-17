@@ -53,7 +53,17 @@ const BottomTab = ({state,descriptors,navigation}) => {
           >
           {            
             
-            <Animated.View 
+            <MotiView
+            // from={{ opacity: 0,transform:[{
+            //   rotate:isFocused?"45deg":"0deg"
+            // }] }}
+            // animate={{ opacity: 1,transform:[{
+            //   rotate:"0deg"
+            // }]  }}
+            // transition={{
+            //   type: 'timing',
+            //   duration: 350,
+            // }}
             style={styles.MainTab}
             >
              {
@@ -61,7 +71,7 @@ const BottomTab = ({state,descriptors,navigation}) => {
              }
              <MotiView
                   from={{ opacity: 0, scale: 0.5 }}
-                   animate={{ opacity: 1, scale: 1.5 }}
+                   animate={{ opacity: 1, scale: 1.5, }}
                     transition={{
                    type: 'timing',
                   duration: 350,
@@ -69,7 +79,7 @@ const BottomTab = ({state,descriptors,navigation}) => {
                 }}
              style={[{backgroundColor:isFocused?'black':null},styles.TabStyle]}
              />
-             </Animated.View>
+             </MotiView>
           }             
           </Pressable>
         );
