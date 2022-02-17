@@ -1,15 +1,12 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import Animated, { useAnimatedStyle } from 'react-native-reanimated'
+import React, { useEffect } from 'react'
+import Animated, { Easing, FadeIn, interpolate, useAnimatedStyle, useSharedValue } from 'react-native-reanimated'
+import { MotiView } from 'moti';
 
-const BottomTab = ({state,descriptors,navigation,open}) => {
-  const AnimatedStyle=useAnimatedStyle(()=>{
-    return{
-      marginLeft:open?30:50,
-    }
-  })
+const BottomTab = ({state,descriptors,navigation}) => {
+
   return (
-    <Animated.View style={[{flexDirection:'row'},AnimatedStyle]}>
+    <Animated.View style={[{flexDirection:'row'}]}>
        {
        state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
@@ -54,14 +51,26 @@ const BottomTab = ({state,descriptors,navigation,open}) => {
             style={{ flex: 1 }}
             key={state.routes[index].key}
           >
-          {
-            <Text style={{ color: isFocused ? 'red' : '#222' }}>
+          {            
+            
+            <Animated.View 
+            style={styles.MainTab}
+            >
              {
-               options.tabBarIcon({})
+               options.tabBarIcon({color:isFocused?'white':'#222',size:24})
              }
-          </Text>
-          }
-              
+             <MotiView
+                  from={{ opacity: 0, scale: 0.5 }}
+                   animate={{ opacity: 1, scale: 1.5 }}
+                    transition={{
+                   type: 'timing',
+                  duration: 350,
+                  easing: Easing.bezier(0.4, 0, 0.2, 0.9)
+                }}
+             style={[{backgroundColor:isFocused?'black':null},styles.TabStyle]}
+             />
+             </Animated.View>
+          }             
           </Pressable>
         );
       })
@@ -72,4 +81,18 @@ const BottomTab = ({state,descriptors,navigation,open}) => {
 
 export default BottomTab
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  TabStyle:{
+    height:40,
+    width:40,
+    position:'absolute',
+    borderRadius:40,
+    top:-6,
+    zIndex:-1000
+  },
+  MainTab:{
+    zIndex:1000,
+    alignItems:'center',
+    justifyContent:'center',
+  }
+})

@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View,Pressable, Dimensions,TouchableWithoutFeedback } from 'react-native'
-import React, { useCallback, useEffect, useState } from 'react'
-import Svg,{Path} from "react-native-svg";
-import Animated, { useAnimatedStyle, useDerivedValue, useSharedValue, withDelay, withSpring, withTiming } from 'react-native-reanimated';
+import React from 'react'
+import Animated, { useAnimatedStyle, useSharedValue,withTiming } from 'react-native-reanimated';
 import BottomTab from './BottomTab';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 const {width,height}=Dimensions.get('window');
 const styles = StyleSheet.create({
   TabBarStyle:{
@@ -20,7 +20,6 @@ const styles = StyleSheet.create({
  View2:{
     height:65,
     width:70,
-    
     backgroundColor:'#fff',
     position: 'absolute',
     right:-10,
@@ -30,6 +29,11 @@ const styles = StyleSheet.create({
     borderTopLeftRadius:30,
     borderBottomLeftRadius:30,
 
+ },
+ ShortBottomView:{
+  position:'absolute',
+  alignSelf:'center',
+  top:15
  }
 })
 
@@ -38,7 +42,7 @@ const TabBar = ({ state, descriptors, navigation }) => {
   const animatedstyle=useAnimatedStyle(()=>{
     return{
       width:(open.value)?withTiming(width-40):withTiming(70),
-      right:(open.value)?withTiming(0):withTiming(-70),
+      right:(open.value)?withTiming(0):withTiming(-width/2),
       marginRight:20
     }
   })
@@ -53,10 +57,11 @@ const TabBar = ({ state, descriptors, navigation }) => {
     <>
     <TouchableWithoutFeedback style={{width:60,height:60,backgroundColor:"red"}} onPress={()=>open.value=!open.value}>
        <Animated.View key={state.index} style={[styles.View2,AnimatedView2]} >
+         <Ionicons name='menu-outline' color={"black"} size={33} style={styles.ShortBottomView}/>
        </Animated.View>
       </TouchableWithoutFeedback>
             <Animated.View  key={state.index} style={[styles.TabBarStyle,animatedstyle]} >  
-            <BottomTab state={state} descriptors={descriptors} navigation={navigation} open={open} />
+            <BottomTab state={state} descriptors={descriptors} navigation={navigation} />
           </Animated.View>
           </>
           
