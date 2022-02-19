@@ -14,6 +14,7 @@
     "@react-navigation/bottom-tabs": "^6.2.0",
     "@react-navigation/native": "^6.0.8",
     "@react-navigation/native-stack": "^6.5.0",
+    "moti": "^0.17.1",
     "react": "17.0.2",
     "react-freeze": "^1.0.0",
     "react-native": "0.67.2",
@@ -24,6 +25,7 @@
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.11.0",
     "react-native-svg": "^12.1.1",
+    "react-native-vector-icons": "^9.1.0",
     "react-native-wagmi-charts": "^2.1.0"
   },
   "devDependencies": {
