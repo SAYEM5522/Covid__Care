@@ -15,8 +15,7 @@ const styles = StyleSheet.create({
   container: {
     height: height,
     width: width,
-    backgroundColor: 'white'
-
+    backgroundColor: '#fff'
   },
   map: {
     flex: 1
