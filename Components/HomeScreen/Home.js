@@ -2,7 +2,6 @@ import { Dimensions, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { LineChart } from 'react-native-wagmi-charts';
 import Animated, {  } from 'react-native-reanimated';
-import data from "../Data";
 const {width,height}=Dimensions.get('window');
 
 const styles = StyleSheet.create({
@@ -67,7 +66,7 @@ const Home = () => {
 
   return (
     <Animated.View style={[styles.Graph]}>
-      <View style={styles.GraphView}>
+      {/* <View style={styles.GraphView}>
         <View style={styles.GraphLine1}/>
         <View style={styles.GraphLine2}/>
         <View style={styles.GraphLine3}/>
@@ -82,7 +81,7 @@ const Home = () => {
       <LineChart.CursorLine lineProps={{scaleX:1.5,}}  color={"white"} />
     </LineChart>
     </LineChart.Provider>
-    </View>
+    </View> */}
     </Animated.View>
   )
 }

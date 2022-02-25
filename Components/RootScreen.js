@@ -9,6 +9,7 @@ import InfectionRate from "../Components/HealthStatusScreen/InfectionTracker/Inf
 import Update from './HomeScreen/Update'
 import { Provider } from 'react-redux'
 import store from './app/store'
+import Authentication from "../Components/Authentication/Authentication"
 const RootScreen = () => {
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +22,7 @@ const Stack = createNativeStackNavigator();
       <Stack.Screen name="IsolationTracker" component={IsolationTracker} />
       <Stack.Screen name="Update" component={Update} options={{headerShown:false}} />
       <Stack.Screen name="InfectionRate" component={InfectionRate} options={{headerShown:false,animation:"slide_from_right",presentation:'transparentModal'}} />
+      <Stack.Screen name="Authentication" component={Authentication} options={{headerShown:false}} />
     </Stack.Navigator>
     </NavigationContainer>
     </Provider>

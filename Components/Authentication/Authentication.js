@@ -2,7 +2,7 @@ import { Dimensions, StyleSheet, Text, View,TouchableWithoutFeedback, Image, Key
 import React, { useCallback, useState } from 'react'
 import Animated, {  useAnimatedStyle, useSharedValue, withSpring, } from 'react-native-reanimated'
 import SignIn from './SignIn'
-import SignUp from './SIgnUp'
+import SignUp from './SignUp'
 const { width, height } = Dimensions.get('window')
 const styles = StyleSheet.create({
   Container:{

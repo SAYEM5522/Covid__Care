@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
-  TrackerCount=0
+  TrackerCount:0
 }
 const InTrackerSlice = createSlice({
   name: "InTrackerSlice",
