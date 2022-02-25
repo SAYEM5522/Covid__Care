@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
     height: height,
     width: width,
     backgroundColor: 'white'
+
   },
   map: {
     flex: 1
@@ -32,4 +33,6 @@ const Location = () => {
   )
 }
 
+
 export default Location
+
