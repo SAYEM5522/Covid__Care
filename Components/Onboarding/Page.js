@@ -1,7 +1,9 @@
-import { StyleSheet, Text, View,Image, Dimensions } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View,Image, Dimensions, Pressable } from 'react-native'
+import React, { useCallback } from 'react'
 import Animated, { Extrapolate, interpolate, useAnimatedStyle, withSpring, withTiming } from 'react-native-reanimated'
 const {width,height}=Dimensions.get('window');
+import { useNavigation } from '@react-navigation/native'
+
 const styles = StyleSheet.create({
   Image:{
     height:height/2,
@@ -53,6 +55,10 @@ const configaration={
   restDisplacementThreshold:100,
 }
 const Page = ({x,item,index}) => {
+  const navigation = useNavigation()
+  const onPress = useCallback(() => {
+    navigation.push("Authentication")
+  },[])
   const ImageStyle=useAnimatedStyle(()=>{
     return{
       transform:[{
@@ -82,9 +88,9 @@ const Page = ({x,item,index}) => {
    
     {
        (item.show)?
-       <View style={styles.Button}>
+       <Pressable onPress={onPress} style={styles.Button} >
        <Text style={styles.ButtonText}> Get Started</Text>
-      </View>
+      </Pressable>
       :null
     }
    

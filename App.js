@@ -3,16 +3,15 @@ import React from 'react';
 import {GestureHandlerRootView} from "react-native-gesture-handler"
 import Authentication from "./Components/Authentication/Authentication"
 import RootScreen from './Components/RootScreen';
-import Onboarding from './Components/Onboarding/Onboarding';
+
 
 const App = () => {
   const authentication=true;
   return (
     <GestureHandlerRootView style={styles.hello}>
-      {/* {
-        authentication?<RootScreen/>:<Authentication/>
-      } */}
-      <Onboarding/>
+      
+        <RootScreen/>
+      
     </GestureHandlerRootView>
   );
 };

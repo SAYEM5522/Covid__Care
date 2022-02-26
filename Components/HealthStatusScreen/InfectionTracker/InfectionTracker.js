@@ -7,28 +7,28 @@ import { useNavigation } from '@react-navigation/native'
 const {width,height} = Dimensions.get('window')
  const data=[
    {
-      id:1,
+      id:0,
       infectionType:"Flu",
   },
     {
-      id:2,
+      id:1,
       infectionType:"Fever",
   }
   ,
     {
-      id:3,
+      id:2,
       infectionType:"Cold",
   },
   {
-    id:4,
+    id:3,
     infectionType:"Cough",
   },
   {
-    id:5,
+    id:4,
     infectionType:"Headache",
   },
   {
-    id:6,
+    id:5,
     infectionType:"White Bloom",
   }
 ]
@@ -67,9 +67,9 @@ const InfectionTracker = () => {
           <ScrollView
           >
         {
-          data.map(item=>{
+          data.map((item,index)=>{
             return(
-              <Item key={item.id} item={item}/>
+              <Item key={index} item={item}/>
             )
           })
         }

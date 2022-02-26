@@ -7,6 +7,7 @@ const { width, height } = Dimensions.get('window')
 const styles = StyleSheet.create({
   Container:{
     flex:1,
+    backgroundColor:'#fff',
   },
   Authentication1:{
     height:(height/2)+10,
@@ -82,7 +83,9 @@ const styles = StyleSheet.create({
     width:width,
     resizeMode:'cover',
     borderBottomLeftRadius:50,
-    borderBottomRightRadius:50
+    borderBottomRightRadius:50,
+    position:'absolute',
+    zIndex:-1,
     
   },
   
