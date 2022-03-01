@@ -1,7 +1,9 @@
 package com.react__native__cli3;
 
-import com.facebook.react.ReactActivity;
 import android.os.Bundle;
+import com.facebook.react.ReactActivity;
+import org.devio.rn.splashscreen.SplashScreen; // here
+
 public class MainActivity extends ReactActivity {
 
   /**
@@ -12,8 +14,10 @@ public class MainActivity extends ReactActivity {
   protected String getMainComponentName() {
     return "React__Native__Cli3";
   }
+
   @Override
-protected void onCreate(Bundle savedInstanceState) {
-  super.onCreate(null);
-}
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(null);
+    SplashScreen.show(this); // here
+  }
 }

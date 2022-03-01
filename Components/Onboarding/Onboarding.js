@@ -10,16 +10,16 @@ const data=[
      infectionType:"Flu",
      color:"#30c3f1",
      img:require("../assets/ob2.png"),
-     type:"Safety",
-     des:"The virus can spread from an infected person’s mouth or nose"
+     type:"Health Tips",
+     des:"Ensure your wellbeing by following our guidelines"
  },
    {
      id:2,
      infectionType:"Fever",
       color:"black",
       img:require("../assets/ob2.png"),
-     type:"Infection Track",
-     des:"The virus can spread from an infected person’s mouth or nose"
+     type:"Symptom Tracker",
+     des:"Worried about developing covid symptoms? self assess yourself here"
 
  }
  ,
@@ -28,8 +28,8 @@ const data=[
      infectionType:"Cold",
       color:"#f1c40f",
       img:require("../assets/ob4.png"),
-      type:"Infection Track",
-      des:"The virus can spread from an infected person’s mouth or nose",
+      type:"Covid Tracker",
+      des:"Locate high risk areas to avoid infection ",
       show:true
 
  },

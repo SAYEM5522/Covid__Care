@@ -1,9 +1,9 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect } from 'react'
-import Animated, { Easing, FadeIn, interpolate, useAnimatedStyle, useSharedValue } from 'react-native-reanimated'
+import Animated, { Easing} from 'react-native-reanimated'
 import { MotiView } from 'moti';
 
-const BottomTab = ({state,descriptors,navigation}) => {
+const BottomTab = ({state,descriptors,navigation,open}) => {
 
   return (
     <Animated.View style={[{flexDirection:'row'}]}>
@@ -17,7 +17,7 @@ const BottomTab = ({state,descriptors,navigation}) => {
             : options.title !== undefined
             ? options.title
             : route.name;
-
+          
         const isFocused = state.index === index;
 
         const onPress = () => {
@@ -50,20 +50,10 @@ const BottomTab = ({state,descriptors,navigation}) => {
             onLongPress={onLongPress}
             style={{ flex: 1 }}
             key={state.routes[index].key}
-          >
-          {            
+          >          
+          {   
             
             <MotiView
-            // from={{ opacity: 0,transform:[{
-            //   rotate:isFocused?"45deg":"0deg"
-            // }] }}
-            // animate={{ opacity: 1,transform:[{
-            //   rotate:"0deg"
-            // }]  }}
-            // transition={{
-            //   type: 'timing',
-            //   duration: 350,
-            // }}
             style={styles.MainTab}
             >
              {
@@ -80,11 +70,15 @@ const BottomTab = ({state,descriptors,navigation}) => {
              style={[{backgroundColor:isFocused?'black':null},styles.TabStyle]}
              />
              </MotiView>
+             
           }             
           </Pressable>
         );
       })
       }
+      
+         
+      
     </Animated.View>
   )
 }

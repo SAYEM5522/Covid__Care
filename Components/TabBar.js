@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View,Pressable, Dimensions,TouchableWithoutFeedback } from 'react-native'
-import React from 'react'
+import React, { useCallback } from 'react'
 import Animated, { useAnimatedStyle, useSharedValue,withTiming } from 'react-native-reanimated';
 import BottomTab from './BottomTab';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -51,17 +51,20 @@ const TabBar = ({ state, descriptors, navigation }) => {
       right:(open.value)?withTiming(-80):withTiming(0),
     }
   })
+  const onPress=useCallback(()=>{
+    open.value=!open.value
+  },[open.value])
 
 
   return (
     <>
-    <TouchableWithoutFeedback style={{width:60,height:60,backgroundColor:"red"}} onPress={()=>open.value=!open.value}>
+    <TouchableWithoutFeedback style={{width:60,height:60,backgroundColor:"red"}} onPress={onPress}>
        <Animated.View key={state.index} style={[styles.View2,AnimatedView2]} >
          <Ionicons name='menu-outline' color={"black"} size={33} style={styles.ShortBottomView}/>
        </Animated.View>
       </TouchableWithoutFeedback>
             <Animated.View  key={state.index} style={[styles.TabBarStyle,animatedstyle]} >  
-            <BottomTab state={state} descriptors={descriptors} navigation={navigation} />
+            <BottomTab state={state} descriptors={descriptors} navigation={navigation} open={open.value} />
           </Animated.View>
           </>
           
