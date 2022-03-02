@@ -4,6 +4,7 @@ import Animated, { interpolate, useAnimatedStyle, useSharedValue, withTiming } f
 import axios from 'axios'
 import BarGraph from './BarGraph'
 import Loading from './Loading'
+import { LineChart } from 'react-native-chart-kit'
 const {width,height}=Dimensions.get('window');
 const styles = StyleSheet.create({
   Height:{
@@ -21,17 +22,18 @@ const styles = StyleSheet.create({
   }
 })
 const Update = ({api}) => {
-  const [data1,setData] = React.useState([]);
+  
+  const [data,setData] = React.useState([]);
+  const [data1,setData1] = React.useState([100,50,20,110,60]);
+
+
   useEffect(()=>{
     async function getUser() {
      const response = await axios.get(api);
     const covid= response.data.timeline.cases
-
-//  console.log(Object.keys(covid).map(key=>covid))
-    const v= Object.values(response.data.timeline.cases)
-    const o= Object.keys(response.data.timeline.cases)
-    console.log( [...v,...o])
-
+    const m=Object.keys(covid).map(key=>covid[key]/10000)
+     setData1(Object.keys(covid).map(key=>parseInt(covid[key]/1000)))
+     setData(Object.keys(covid).map(key=>key))
     //  const country= response.data.map((item)=>(
     // {
     //     timestamp:item.updated,
@@ -53,8 +55,47 @@ const Update = ({api}) => {
   
   return (
     <View >
-      <View style={styles.LoadingIndicator}>
-      </View>  
+     <View>
+  <LineChart
+    data={{
+      labels: data,
+      datasets: [
+
+        {
+          data:data1,
+        }
+      ]
+    }}
+    width={Dimensions.get("window").width} // from react-native
+    height={height/2}
+    
+    yAxisSuffix="k"
+    yAxisInterval={1} // optional, defaults to 1
+    chartConfig={{
+      backgroundColor: "#F84F46",
+      backgroundGradientFrom: "#431936",
+      backgroundGradientTo: "#15142A",
+      decimalPlaces: 1, 
+      color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+      labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+      style: {
+        borderRadius: 16,
+        
+      },
+      propsForDots: {
+        r: "6",
+        strokeWidth: "2",
+        stroke: "#ffa726"
+      },
+    }}
+    bezier
+    style={{
+      marginVertical: 8,
+      borderRadius: 5,
+     
+    }}
+  />
+</View>
     </View>
   )
 }
