@@ -11,7 +11,7 @@ const {width,height}=Dimensions.get("window")
 const styles = StyleSheet.create({
   Container:{
     flex:1,
-    backgroundColor:'black',
+    backgroundColor:'red',
     position:'absolute'
   },
   BottomView:{
@@ -65,7 +65,6 @@ const CovidUpdate = () => {
         timestamp:item.updated,
         value:item.todayCases,
         country:item.country}))
-     console.log(country)
      setData(country)
      setloading(false)
     }
@@ -95,8 +94,7 @@ const CovidUpdate = () => {
   })
 
   const animatedStyles = useAnimatedStyle(() => {
-    return {
-     
+    return {    
      transform:[{
        translateX:clamp(x.value,-(width-20),0)
      }],

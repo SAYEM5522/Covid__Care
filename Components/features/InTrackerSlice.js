@@ -1,14 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   TrackerCount:0,
-  scrollvalue:0
+  scrollvalue:0,
+  todo:[]
 }
+
 const InTrackerSlice = createSlice({
   name: "InTrackerSlice",
   initialState,
   reducers: {
     setCount:(state,action)=>{
-      state.TrackerCount=action.payload;
+      state.TrackerCount+=1;
+      
     },
     setScrollValue:(state,action)=>{
       state.scrollvalue=action.payload;

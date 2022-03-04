@@ -11,6 +11,9 @@ import { Provider } from 'react-redux'
 import store from './app/store'
 import Authentication from "../Components/Authentication/Authentication"
 import Onboarding from './Onboarding/Onboarding'
+import CovidUpdate from './HomeScreen/CovidUpdate'
+import { enableFreeze } from 'react-native-screens';
+enableFreeze(true);
 const RootScreen = () => {
 const Stack = createNativeStackNavigator();
 const authentication=false;
@@ -20,11 +23,12 @@ const authentication=false;
           <Stack.Navigator >
               {/* <Stack.Screen name="Onboarding" component={Onboarding} options={{headerShown:false}} /> */}
               <Stack.Screen name="Screen" component={Screen} options={{headerShown:false}} />
-              <Stack.Screen name="Authentication" component={Authentication} options={{headerShown:false,animation:"slide_from_right",presentation:'transparentModal'}} />
+              {/* <Stack.Screen name="Authentication" component={Authentication} options={{headerShown:false,animation:"slide_from_right",presentation:'transparentModal'}} /> */}
               <Stack.Screen name="InfectionTracker" component={InfectionTracker} options={{headerShown:false}}  />
               <Stack.Screen name="IsolationTracker" component={IsolationTracker} />
               <Stack.Screen name="Update" component={Update} options={{headerShown:false}} />
               <Stack.Screen name="InfectionRate" component={InfectionRate} options={{headerShown:false,animation:"slide_from_right",presentation:'transparentModal'}} />
+              <Stack.Screen name="CovidUpdate" component={CovidUpdate} options={{headerShown:false}}/>
             </Stack.Navigator>
     </NavigationContainer>
     </Provider>

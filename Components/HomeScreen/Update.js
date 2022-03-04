@@ -14,10 +14,12 @@ const styles = StyleSheet.create({
     borderTopLeftRadius:5,
     borderTopRightRadius:5
   },
+
   LoadingIndicator:{
-    flex:1,
-    backgroundColor:"#010100",
-    alignItems:"center",
+    height:height,
+    width:width,
+    backgroundColor:'black',
+    alignItems:'center',
     justifyContent:'center'
   }
 })
@@ -25,8 +27,7 @@ const Update = ({api}) => {
   
   const [data,setData] = React.useState([]);
   const [data1,setData1] = React.useState([100,50,20,110,60]);
-
-
+  const [loading,setloading] = React.useState(true);
   useEffect(()=>{
     async function getUser() {
      const response = await axios.get(api);
@@ -34,14 +35,7 @@ const Update = ({api}) => {
     const m=Object.keys(covid).map(key=>covid[key]/10000)
      setData1(Object.keys(covid).map(key=>parseInt(covid[key]/1000)))
      setData(Object.keys(covid).map(key=>key))
-    //  const country= response.data.map((item)=>(
-    // {
-    //     timestamp:item.updated,
-    //     value:item.todayCases,
-    //     country:item.country
-    //  }
-    //  ))
-    //  setData(country)
+     setloading(false)
     }
   getUser(),
   ()=> getUser();
@@ -55,47 +49,57 @@ const Update = ({api}) => {
   
   return (
     <View >
-     <View>
-  <LineChart
-    data={{
-      labels: data,
-      datasets: [
+      {
+        loading?
+         <View style={styles.LoadingIndicator}>
+         <Loading/>
+         </View>
+         :
 
-        {
-          data:data1,
-        }
-      ]
-    }}
-    width={Dimensions.get("window").width} // from react-native
-    height={height/2}
-    
-    yAxisSuffix="k"
-    yAxisInterval={1} // optional, defaults to 1
-    chartConfig={{
-      backgroundColor: "#F84F46",
-      backgroundGradientFrom: "#431936",
-      backgroundGradientTo: "#15142A",
-      decimalPlaces: 1, 
-      color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-      labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-      style: {
-        borderRadius: 16,
-        
-      },
-      propsForDots: {
-        r: "6",
-        strokeWidth: "2",
-        stroke: "#ffa726"
-      },
-    }}
-    bezier
-    style={{
-      marginVertical: 8,
-      borderRadius: 5,
-     
-    }}
-  />
+<View>
+<LineChart
+  data={{
+    labels: data,
+    datasets: [
+
+      {
+        data:data1,
+      }
+    ]
+  }}
+  width={Dimensions.get("window").width} // from react-native
+  height={height/2}
+  
+  yAxisSuffix="k"
+  yAxisInterval={1} // optional, defaults to 1
+  chartConfig={{
+    backgroundColor: "#F84F46",
+    backgroundGradientFrom: "#431936",
+    backgroundGradientTo: "#15142A",
+    decimalPlaces: 1, 
+    color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+    labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+    style: {
+      borderRadius: 16,
+      
+    },
+    propsForDots: {
+      r: "6",
+      strokeWidth: "2",
+      stroke: "#ffa726"
+    },
+  }}
+  bezier
+  style={{
+    marginVertical: 8,
+    borderRadius: 5,
+   
+  }}
+/>
 </View>
+
+      }
+   
     </View>
   )
 }

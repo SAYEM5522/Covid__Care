@@ -4,9 +4,7 @@ import { useNavigation } from '@react-navigation/native'
 import HealthTips from './HealthStatus/HealthTips'
 const HealthStatus = () => {
   const navigation = useNavigation()
-  const onPress = useCallback(() => {
-    navigation.push("InfectionTracker")
-  },[])
+
   return (
     <View>
      <HealthTips/>
