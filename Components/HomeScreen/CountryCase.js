@@ -4,7 +4,12 @@ import React from 'react'
 const CountryCase = () => {
   return (
     <View>
-      <Text>CountryCase</Text>
+      <Text style={{color:'red'}}>CountryCase</Text>
+      <Text style={{color:'white'}}>CountryCase</Text>
+      <Text style={{color:'white'}}>CountryCase</Text>
+      <Text >CountryCase</Text>
+      <Text >CountryCase</Text>
+
     </View>
   )
 }

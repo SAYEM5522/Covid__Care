@@ -11,8 +11,7 @@ const {width,height}=Dimensions.get("window")
 const styles = StyleSheet.create({
   Container:{
     flex:1,
-    backgroundColor:'red',
-    position:'absolute'
+    backgroundColor:'black',
   },
   BottomView:{
     width:width,
@@ -20,21 +19,12 @@ const styles = StyleSheet.create({
     backgroundColor:'#fff',
     borderRadius:10,
     borderBottomLeftRadius:10,
-    borderBottomRightRadius:10
+    borderBottomRightRadius:10,
+    top:-height
    
   },
-  topArrow:{
-    color:"black",
-    top:15,
-    alignSelf:'center'
-  },
-  graph:{
-    flex:1,
-    alignItems:'center',
-    justifyContent:'center'
-  },
   View1:{
-    flex:1
+    height:height
   },
   LoadingIndicator:{
     height:height,
@@ -58,13 +48,17 @@ function clamp(value, lowerBound, upperBound) {
 const CovidUpdate = () => {
   const [data,setData] = React.useState([]);
   const [loading,setloading] = React.useState(true);
+  const country="USA"
   useEffect(()=>{
     async function getUser() {
-     const response = await axios.get("https://disease.sh/v3/covid-19/countries");
+     const response = await axios.get("https://disease.sh/v3/covid-19/countries?yesterday=true");
      const country= response.data.map((item)=>({
         timestamp:item.updated,
-        value:item.todayCases,
-        country:item.country}))
+        todayCases:item.todayCases,
+        todayDeaths:item.todayDeaths,
+        todayRecovered:item.todayRecovered,
+        country:item.country,
+      }))
      setData(country)
      setloading(false)
     }
@@ -98,7 +92,6 @@ const CovidUpdate = () => {
      transform:[{
        translateX:clamp(x.value,-(width-20),0)
      }],
-    //  top:open.value?0:height-85
     left:width-20
     };
   });
@@ -112,19 +105,23 @@ const CovidUpdate = () => {
         <Loading/>
         </View>
         :
-     <View>
+     <>
         <View style={styles.View1}>
         <CountryCase/>
-     </View> 
-     <GestureDetector gesture={gesture1}>
+        </View> 
+        <View>
+        <GestureDetector gesture={gesture1}>
      <Animated.View style={[styles.BottomView, animatedStyles]} >
  
-       <View style={styles.graph}>
-       <Update api="https://disease.sh/v3/covid-19/historical/India?lastdays=5"/>
-       </View>
+         {
+           <Update item={data} country={country} />
+         }
+       
      </Animated.View>
      </GestureDetector>
-       </View>
+          </View>
+    
+    </>
       }
 
    

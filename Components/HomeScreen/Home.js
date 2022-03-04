@@ -34,14 +34,14 @@ const styles = StyleSheet.create({
 const Home = () => {
   const navigation=useNavigation();
   const onPress=useCallback(()=>{
-    navigation.navigate('InfectionTracker')
+    navigation.navigate('CovidUpdate')
   },[])
 
   return (
     <Animated.View style={[styles.Graph]}>
       <Pressable onPress={onPress}>
         <Text style={{color:'white'}} >
-          InfectionTracker
+          Update
         </Text>
       </Pressable>
     </Animated.View>
