@@ -9,7 +9,6 @@ import Animated, {
 } from 'react-native-reanimated';
 import { useSelector } from 'react-redux';
 import { selectCount } from '../../features/InTrackerSlice';
-const BACKGROUND_COLOR = 'black';
 const BACKGROUND_STROKE_COLOR = '#49887B';
 const STROKE_COLOR = '#fff';
 const { width, height } = Dimensions.get('window');
@@ -36,20 +35,19 @@ const styles = StyleSheet.create({
     letterSpacing: 2.0,
   },
   container: {
-    flex: 1,
-    backgroundColor: BACKGROUND_COLOR,
+    width:width/2,
+    height:height/3.5,
+    backgroundColor:'#668887',
     alignItems: 'center',
     justifyContent: 'center',
+    borderTopLeftRadius:30,
+    borderBottomLeftRadius:30,
 
   },
   TextAnimation:{
     fontSize: R / 3,
     fontWeight: "500",
     textAlign: "center",
-    textShadowColor: "white",
-    textShadowOffset: { width: 2, height: 2 },
-    textShadowRadius: 4,
-    elevation: 3,
     color:"white",
     ...StyleSheet.absoluteFill
   }
@@ -78,7 +76,7 @@ const InfectionRate = () => {
     }
   }
   useEffect(()=>{
-    progress.value=withTiming(convert().result,{duration:1000,easing:Easing.linear})
+    progress.value=withTiming(convert().result,{duration:1250,easing:Easing.linear})
   },[])
   const animatedInputProps = useAnimatedProps(() => {
     const percentComplete = clamp(progress.value, 0, 1);

@@ -46,10 +46,10 @@ const Item = ({item,index}) => {
             translateX:withTiming(interpolate(transition.value,[0,1],[(item.id%2==0)?-width/2:width/2,0],{easing:Easing.linear,duration:1300}))
           },
           {
-            scale:withTiming(interpolate(scalUp.value,[0,1],[1,1.1],{easing:Easing.linear,duration:1000}))
+            scale:withTiming(interpolate(scalUp.value,[0,1],[1,1.04],{easing:Easing.linear,duration:1000}))
           },
           {
-            perspective:withTiming(interpolate(scalUp.value,[0,1],[0,1000],{easing:Easing.linear,duration:1000}))
+            perspective:withTiming(interpolate(scalUp.value,[0,1],[1,1000],{easing:Easing.linear,duration:1000}))
           },
  
         ],

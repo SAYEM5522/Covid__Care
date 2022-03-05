@@ -98,7 +98,7 @@ const renderItem=({item,index})=>{
 const Button=()=>{
   const navigation = useNavigation()
   const onPress=useCallback(()=>{
-    navigation.navigate('InfectionRate')
+    navigation.navigate('InfectionRatePage')
   },[])
   return(
     <Pressable style={styles.Button} onPress={onPress}>
@@ -109,7 +109,6 @@ const Button=()=>{
   )
 }
 const InfectionTracker = () => {
-  const navigation = useNavigation()
 
   return (
     <View style={styles.Container}> 
@@ -123,10 +122,7 @@ const InfectionTracker = () => {
     contentContainerStyle={{alignSelf:'center'}}
     ListHeaderComponent={<Header/>}
     ListFooterComponent={Button}
-    />
-
- 
-        
+    />  
     </View>
   )
 }
