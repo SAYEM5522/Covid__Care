@@ -8,44 +8,49 @@ const {width,height} = Dimensions.get('window')
  const data=[
    {
       id:0,
-      infectionType:"Flu",
-      img:"https://cdn.pixabay.com/photo/2020/03/03/12/15/mask-4898571__340.jpg"
+      infectionType:"Fatigue",
+      img:require('../../../Components/assets/sym1.png'),
   },
     {
       id:1,
-      infectionType:"Fever",
-      img:"https://global-uploads.webflow.com/5e3ce2ec7f6e53c045fe7cfa/5fc50ce6d7a9287f01ea775f_Cough-01.png"
+      infectionType:"Vomit",
+      img:require('../../../Components/assets/sym2.png'),
+
 
   }
   ,
     {
       id:2,
-      infectionType:"Cold",
-      img:"https://global-uploads.webflow.com/5e3ce2ec7f6e53c045fe7cfa/5fc50ce6d7a9287f01ea775f_Cough-01.svg"
+      infectionType:"Headache",
+      img:require('../../../Components/assets/sym3.png'),
+
 
   },
   {
     id:3,
-    infectionType:"Cough",
-    img:"https://global-uploads.webflow.com/5e3ce2ec7f6e53c045fe7cfa/5fc50ce6d7a9287f01ea775f_Cough-01.svg"
+    infectionType:"No Taste",
+    img:require('../../../Components/assets/sym4.png'),
+
 
   },
   {
     id:4,
-    infectionType:"Headache",
-    img:"https://global-uploads.webflow.com/5e3ce2ec7f6e53c045fe7cfa/5fc50ce6d7a9287f01ea775f_Cough-01.svg"
+    infectionType:"Jhmneckache",
+    img:require('../../../Components/assets/sym5.png'),
+
 
   },
   {
     id:5,
-    infectionType:"White Bloom",
-    img:"https://global-uploads.webflow.com/5e3ce2ec7f6e53c045fe7cfa/5fc50ce6d7a9287f01ea775f_Cough-01.svg"
+    infectionType:"Fever",
+    img:require('../../../Components/assets/sym6.png'),
+
 
   }
 ]
 const styles = StyleSheet.create({
   Container:{
-    backgroundColor:"#fff",
+    backgroundColor:"whitesmoke",
     flex:1
   },
   container:{
