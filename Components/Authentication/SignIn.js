@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
     borderRadius:5,
     paddingHorizontal:10,
     position:'relative',
-    
   },
 })
 const SignIn = () => {
@@ -42,7 +41,8 @@ const SignIn = () => {
              password={true}
              secureTextEntry={!passwordVisible}
              autoCompleteType="password"
-             placeholder='PassWard...' style={styles.textInput}                    
+             placeholder='PassWard...'
+              style={styles.textInput}                 
               />
               <Feather name={passwordVisible?"eye":"eye-off"} onPress={onPress} size={23} style={{position:'absolute',right:10,bottom:10}}/>
               </View>

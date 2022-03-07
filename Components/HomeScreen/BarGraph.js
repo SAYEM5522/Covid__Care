@@ -2,7 +2,6 @@ import { StyleSheet, Text, View } from 'react-native'
 import React, { useEffect } from 'react'
 import Animated, { interpolate, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
 import axios from 'axios'
-import { formatDatetime } from 'react-native-wagmi-charts'
 
 const BarGraph = ({api}) => {
   const [data1,setData] = React.useState([]);

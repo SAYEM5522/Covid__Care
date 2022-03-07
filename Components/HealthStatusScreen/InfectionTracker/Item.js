@@ -75,7 +75,8 @@ const Item = ({item,index}) => {
   
       transform:[{
         scale:withTiming(interpolate(scalUp.value,[0,1],[0,1],{easing:Easing.linear,duration:1000}))
-      }]
+      }],
+      opacity:withTiming(interpolate(scalUp.value,[0,1],[0,1],{easing:Easing.linear,duration:1000}))
     }
   })
   

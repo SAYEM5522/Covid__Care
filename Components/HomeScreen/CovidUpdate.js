@@ -7,6 +7,8 @@ import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
 import CountryCase from './CountryCase'
 import Loading from './Loading'
 import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectCountry } from '../features/InTrackerSlice'
 const {width,height}=Dimensions.get("window")
 const styles = StyleSheet.create({
   Container:{
@@ -48,7 +50,7 @@ function clamp(value, lowerBound, upperBound) {
 const CovidUpdate = () => {
   const [data,setData] = React.useState([]);
   const [loading,setloading] = React.useState(true);
-  const country="USA"
+  const SearchCountry=useSelector(selectCountry)
   useEffect(()=>{
     async function getUser() {
      const response = await axios.get("https://disease.sh/v3/covid-19/countries?yesterday=true");
@@ -58,6 +60,12 @@ const CovidUpdate = () => {
         todayDeaths:item.todayDeaths,
         todayRecovered:item.todayRecovered,
         country:item.country,
+        flag:item.countryInfo.flag,
+        cases:item.cases,
+        active:item.active,
+        recovered:item.recovered,
+        deaths:item.deaths,
+
       }))
      setData(country)
      setloading(false)
@@ -65,10 +73,10 @@ const CovidUpdate = () => {
   getUser(),
   ()=> getUser();
   },[])
+
   
   const x=useSharedValue(0);
   const contex=useSharedValue(0);
-  const AnimatedIcon=Animated.createAnimatedComponent(SimpleLineIcons)
 
   const gesture1 = Gesture.Pan()
   .onBegin(() => {
@@ -114,7 +122,7 @@ const CovidUpdate = () => {
      <Animated.View style={[styles.BottomView, animatedStyles]} >
  
          {
-           <Update item={data} country={country} />
+           <Update item={data} country={SearchCountry}  />
          }
        
      </Animated.View>

@@ -19,7 +19,6 @@ const BottomTab = ({state,descriptors,navigation,open}) => {
             : route.name;
           
         const isFocused = state.index === index;
-
         const onPress = () => {
           const event = navigation.emit({
             type: 'tabPress',
@@ -57,6 +56,8 @@ const BottomTab = ({state,descriptors,navigation,open}) => {
             style={styles.MainTab}
             >
              {
+               
+               
                options.tabBarIcon({color:isFocused?'white':'#222',size:24})
              }
              <MotiView
