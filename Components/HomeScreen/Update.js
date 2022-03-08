@@ -94,7 +94,6 @@ const Update = ({country,item}) => {
     return {data,name:data[1],cases:data[2],recovered:data[3],deaths:data[4],active:data[5]};
   }
    const {data,name,cases,deaths,recovered,active} =IData()
-   console.log(cases)
  
   return (
     <View style={styles.UpdateContaner}>

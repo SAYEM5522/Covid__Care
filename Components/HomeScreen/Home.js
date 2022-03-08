@@ -3,8 +3,6 @@ import React, { useCallback } from 'react'
 import Animated, {  } from 'react-native-reanimated';
 import {useNavigation} from '@react-navigation/native';
 const {width,height}=Dimensions.get('window');
-
-
 const styles = StyleSheet.create({
 
   Graph:{
@@ -36,12 +34,20 @@ const Home = () => {
   const onPress=useCallback(()=>{
     navigation.navigate('CovidUpdate')
   },[])
-
+  const onPress1=useCallback(()=>{
+    navigation.navigate('InfectionTracker')
+  },[])
   return (
     <Animated.View style={[styles.Graph]}>
       <Pressable onPress={onPress}>
         <Text style={{color:'white'}} >
           Update
+        </Text>
+      </Pressable>
+
+      <Pressable onPress={onPress1}>
+        <Text style={{color:'white',top:20}} >
+          InfectionTracker
         </Text>
       </Pressable>
     </Animated.View>

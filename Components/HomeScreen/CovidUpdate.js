@@ -74,6 +74,8 @@ const CovidUpdate = () => {
   ()=> getUser();
   },[])
 
+  // console.log(data)
+
   
   const x=useSharedValue(0);
   const contex=useSharedValue(0);
