@@ -1,7 +1,8 @@
 import { Dimensions, Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { useCallback } from 'react'
-import Animated, {  } from 'react-native-reanimated';
+import Animated, { Easing } from 'react-native-reanimated';
 import {useNavigation} from '@react-navigation/native';
+import { MotiView } from 'moti';
 const {width,height}=Dimensions.get('window');
 const styles = StyleSheet.create({
 
@@ -26,6 +27,17 @@ const styles = StyleSheet.create({
     marginLeft:30,
   
 
+  },
+  CriticalRate:{
+    width:100,
+    height:100,
+    borderRadius:100,
+    backgroundColor:"red",
+    ...StyleSheet.absoluteFillObject
+  },
+  center:{
+    justifyContent:'center',
+    alignItems:'center'
   }
 
 })
@@ -50,6 +62,7 @@ const Home = () => {
           InfectionTracker
         </Text>
       </Pressable>
+     
     </Animated.View>
   )
 }

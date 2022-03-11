@@ -4,4 +4,5 @@ export default configureStore({
   reducer: {
     Tracker:InTrackerReducer,
   },
+  
 });

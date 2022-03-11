@@ -3,12 +3,11 @@ import React, { useCallback,useEffect} from 'react'
 import Update from './Update'
 import Animated, { useAnimatedStyle, useSharedValue, withSpring, withTiming } from 'react-native-reanimated'
 import { Gesture, GestureDetector } from 'react-native-gesture-handler'
-import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
 import CountryCase from './CountryCase'
 import Loading from './Loading'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectCountry } from '../features/InTrackerSlice'
+import { selectCountry,setData } from '../features/InTrackerSlice'
 const {width,height}=Dimensions.get("window")
 const styles = StyleSheet.create({
   Container:{
@@ -64,8 +63,7 @@ const CovidUpdate = () => {
         cases:item.cases,
         active:item.active,
         recovered:item.recovered,
-        deaths:item.deaths,
-
+        
       }))
      setData(country)
      setloading(false)
@@ -73,10 +71,6 @@ const CovidUpdate = () => {
   getUser(),
   ()=> getUser();
   },[])
-
-  // console.log(data)
-
-  
   const x=useSharedValue(0);
   const contex=useSharedValue(0);
 
@@ -133,8 +127,6 @@ const CovidUpdate = () => {
     
     </>
       }
-
-   
     </View>
   )
 }

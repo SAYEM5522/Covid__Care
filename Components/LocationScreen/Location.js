@@ -4,9 +4,12 @@ const Token="pk.eyJ1Ijoic2F5ZW01NTIyIiwiYSI6ImNremZxdDFjbzNraTIydm8ydmY4enljb3Ei
 import MapboxGL from '@react-native-mapbox-gl/maps';
 import { Logger } from '@react-native-mapbox-gl/maps';
 import BottomPopUp from './BottomPopUp';
-import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons"
 import AntDesign from "react-native-vector-icons/AntDesign"
-import Animated,{ Extrapolate, interpolate, useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
+import Animated,{ Easing, Extrapolate, interpolate, useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
+import { MotiView } from 'moti';
+import axios from 'axios'
+import Loading from '../HomeScreen/Loading';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 MapboxGL.setAccessToken(Token);
 MapboxGL.setConnected(true);
 const {width, height} = Dimensions.get('window')
@@ -34,7 +37,7 @@ const styles = StyleSheet.create({
   SearchbarList:{
     height:60,
     position:'absolute',
-    top:10,
+    top:30,
     right:10
   },
 
@@ -44,7 +47,7 @@ const styles = StyleSheet.create({
     height:50,
     borderRadius:10,
     alignSelf:"flex-end",
-    marginRight:22,
+    marginRight:10,
     marginTop:-10,
     position:'absolute',
     top:10,
@@ -69,10 +72,36 @@ const styles = StyleSheet.create({
     marginTop:0,
     justifyContent:'center',
     alignSelf:"flex-end",
-    marginRight:22,
+    marginRight:10,
     borderRadius:10,
     zIndex:1000
   },
+  CriticalRate:{
+    width:20,
+    height:20,
+    borderRadius:20,
+    backgroundColor:"red",
+    
+  },
+  center:{
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  LoadingIndicator:{
+    height:height,
+    width:width,
+    backgroundColor:'black',
+    alignItems:'center',
+    justifyContent:'center'
+  },
+  PopUpMenueView:{
+    height:40,
+    width:50,
+    backgroundColor:'red',
+    // position:'absolute',
+    // top:20,
+    // zIndex:1000,
+  }
 })
 const config={
   mass:1,
@@ -82,14 +111,44 @@ const config={
   restSpeedThreshold:0.6
 }
 const Location = () => {
+  const [data,setData] = React.useState([]);
+  const [loading,setloading] = React.useState(true);
+  useEffect(()=>{
+    async function getUser() {
+     const response = await axios.get("https://disease.sh/v3/covid-19/countries?yesterday=true");
+     const country= response.data.map((item)=>({
+        cases:item.cases,
+        active:item.active,
+        recovered:item.recovered,
+        lat:item.countryInfo.lat,
+        long:item.countryInfo.long,
+      }))
+     setData(country)
+     setloading(false)
+    }
+  getUser()
+  // ()=> getUser();
+  },[])
+
   const AnimatedTextInput=Animated.createAnimatedComponent(TextInput)
   const Open=useSharedValue(0)
+  const PopUp=useSharedValue(0)
+  const PopUpMenue=useCallback(()=>{
+   PopUp.value=!PopUp.value
+  },[PopUp.value])
+  const PopUpStyle=useAnimatedStyle(()=>{
+    return{
+      transform:[{
+        scale:PopUp.values?1:0
+      }]
+    }
+  })
   const onPress=useCallback(()=>{
     Open.value=!Open.value
   },[Open.value])
   const SearchBarAnimation=useAnimatedStyle(()=>{
     return{
-      width: withSpring(interpolate(Open.value,[0,1],[50,width-60],Extrapolate.CLAMP),config)
+      width: withSpring(interpolate(Open.value,[0,1],[50,width-45],Extrapolate.CLAMP),config)
     }
   })
   const EditText=useCallback((text)=>{
@@ -111,12 +170,19 @@ const Location = () => {
   },[])
 
   return (
+   
+    
     <View style={styles.page}>
-
-        <View style={styles.SearchbarList}>
-          
+    {
+      loading?
+      <View style={styles.LoadingIndicator}>
+      <Loading/>
+      </View>
+      :
+      <View >
+        <View style={[styles.SearchbarList]}>
           <Animated.View style={[styles.SearchbarBottomview,SearchBarAnimation]}>
-          <KeyboardAvoidingView behavior="position" style={styles.container}  >
+          <KeyboardAvoidingView behavior="height" style={styles.container}  >
             <AnimatedTextInput
             style={[styles.textInput,SearchBarAnimation]}
             placeholder='Search Country...'
@@ -130,22 +196,76 @@ const Location = () => {
             <AntDesign name='search1' color={"black"} onPress={onPress} size={33}/>
           </View>
           </View>
-          
-      {/* <Pressable  onPress={Keyboard.dismiss}>
-      <View style={{position:'absolute',top:60,zIndex:1000,height:height-60}} >
-      </View>
-      </Pressable> */}
       <BottomPopUp/>
-      <View style={styles.container}    >
-        <MapboxGL.MapView style={styles.map}  onPress={Keyboard.dismiss}   >
-          <MapboxGL.Camera zoomLevel={10} centerCoordinate={coordinates} />
-          <MapboxGL.PointAnnotation   coordinate={coordinates} id={"test"}  />
+      <View style={styles.container}>
+        <MapboxGL.MapView
+        style={styles.map}  onPress={Keyboard.dismiss}>
+          <MapboxGL.Camera zoomLevel={4} centerCoordinate={coordinates} />
+          <View>
+            {
+              data.map((item,index)=>{
+                return( 
+
+                  <MapboxGL.MarkerView  key={index} id={"`${index}`"} coordinate={[item.long,item.lat]}>
+                  <View>
+                   <Animated.View style={[styles.PopUpMenueView,PopUpStyle]}>
+                  </Animated.View> 
+                  <Pressable onPress={PopUpMenue}>
+                  <View style={styles.CriticalRate}>
+                  </View>
+                  </Pressable>
+                  </View>
+                
+
+                  </MapboxGL.MarkerView>
+                )
+                
+              })
+            }
+           </View>
         </MapboxGL.MapView>
       </View>
+      </View>
+     }
     </View>
+ 
   );
 }
 
 
 export default Location
 
+
+
+// {
+//   [...Array(3).keys()].map((index)=>{
+//      return(
+//        <MotiView
+//        from={{opacity:1,scale:1}}
+//        animate={{opacity:0,scale:4}}
+//        transition={{
+//          type:"timing",
+//          delay:index*550,
+//          duration:3000,
+//          loop:true,
+//          easing:Easing.out(Easing.ease),
+//          repeatReverse:false
+//        }}
+//        key={index}
+//        style={[StyleSheet.absoluteFillObject,styles.CriticalRate]}
+       
+//        />
+//      )
+//   })
+//  }
+
+
+
+
+
+{/* <MapboxGL.MarkerView children={index} key={index} coordinate={[item.long,item.lat]} id={"test"}  >
+<View style={styles.CriticalRate} >
+</View>
+ <MapboxGL.Callout
+  title={`${item.recovered}`}/>
+</MapboxGL.MarkerView> */}

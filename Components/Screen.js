@@ -9,17 +9,24 @@ import EvilIcons from "react-native-vector-icons/EvilIcons";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from "react-native-vector-icons/Feather";
 import HealthStatusScreen from '../Screen/HealthStatusScreen';
-
+const { width, height } = Dimensions.get('window')
 const Tab = createBottomTabNavigator();
 const Screen = () => {
   return (
-    
+    <View style={{
+      width,
+      height,
+      bottom:20
+  }}>
     <Tab.Navigator 
     initialRouteName="Home"
     tabBar={props => <TabBar {...props}  />}
     screenOptions={{
       headerShown:false,
+      
     }}
+    
+    
     >
       <Tab.Screen name="Home"
        options={{
@@ -39,11 +46,14 @@ const Screen = () => {
         }}
       component={HealthStatusScreen}   />
       <Tab.Screen name="Location"
+
         options={{
           tabBarIcon: ({ color, size }) => (
           <EvilIcons name="location" size={30} color={color} />
           ),
         }}
+        
+        
       component={LocationScreen}  
       
       />
@@ -57,6 +67,7 @@ const Screen = () => {
 
 
     </Tab.Navigator>
+    </View>
   
   )
 }
