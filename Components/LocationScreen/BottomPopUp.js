@@ -19,7 +19,7 @@ const data=[
   },
   { 
     id:1,
-    name:"Recover"
+    name:"Recovered"
   },
   { 
     id:2,
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   },
   PopUpView:{
     height:width/2,
-    width:width/2,
+    width:(width/2)+30,
     backgroundColor:'#1c3b4c',
     borderRadius:20,
     top:60,
@@ -59,13 +59,12 @@ const styles = StyleSheet.create({
     height:60,
     flexDirection:'row',
     flexWrap:'wrap',
-    
     borderRadius:10,
-    marginLeft:10,
+    marginLeft:5,
     marginTop:10,
     alignItems:'center',
     justifyContent:'center',
-    // flex:1
+    
   },
   PopUpViewText:{
     color:"white",
@@ -86,13 +85,13 @@ const AnimatedIcon=Animated.createAnimatedComponent(Entypo)
  const PopUpAnimation=useAnimatedStyle(()=>{
    return{
       height:PopUp.value?withTiming(width/2):withTiming(PopUpheight),
-      width:PopUp.value?withTiming(width/2):withTiming(PopUpWidth),
+      width:PopUp.value?withTiming((width/2+15)):withTiming(PopUpWidth),
      
    }
  })
  const iconAnimation=useAnimatedStyle(()=>{
    return{
-     left:PopUp.value?withTiming(width/2-PopUpWidth):withTiming(0),
+     left:PopUp.value?withTiming((width/2-PopUpWidth)+15):withTiming(0),
      transform:[{
        rotate:PopUp.value?withTiming('45deg'):withTiming('0deg')
      }]
@@ -113,7 +112,7 @@ const AnimatedIcon=Animated.createAnimatedComponent(Entypo)
               const AnimatedItemView=useAnimatedStyle(()=>{
                 return{
                    height: PopUp.value?withTiming(width/5.5):withTiming(0),
-                   width: PopUp.value?withTiming(width/5.5):withTiming(0),
+                   width: PopUp.value?withTiming(width/4.3):withTiming(0),
                    backgroundColor:currentIndex.value===index?('black'):('#1c3b4c'),
                 }
               },[])

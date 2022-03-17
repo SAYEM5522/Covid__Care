@@ -6,7 +6,7 @@ const HealthStatus = () => {
   const navigation = useNavigation()
 
   return (
-    <View>
+    <View style={{backgroundColor:"black",flex:1}}>
      <HealthTips/>
     </View>
   )

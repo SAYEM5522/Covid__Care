@@ -1,30 +1,35 @@
 import { Dimensions, StyleSheet, Text, View,Pressable,KeyboardAvoidingView,TextInput,Keyboard } from 'react-native'
 import React, { useState,useEffect, useCallback } from 'react'
-const Token="pk.eyJ1Ijoic2F5ZW01NTIyIiwiYSI6ImNremZxdDFjbzNraTIydm8ydmY4enljb3EifQ.-Tm4Vg6gLHSqEVjOmEWhjA"
-import MapboxGL from '@react-native-mapbox-gl/maps';
-import { Logger } from '@react-native-mapbox-gl/maps';
+
 import BottomPopUp from './BottomPopUp';
 import AntDesign from "react-native-vector-icons/AntDesign"
 import Animated,{ Easing, Extrapolate, interpolate, useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 import { MotiView } from 'moti';
 import axios from 'axios'
 import Loading from '../HomeScreen/Loading';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-MapboxGL.setAccessToken(Token);
-MapboxGL.setConnected(true);
+import { useDispatch, useSelector } from 'react-redux';
+import { selectLocationCountry, setLocationCountry } from '../features/InTrackerSlice';
+import MapView, { Callout, Marker } from 'react-native-maps';
 const {width, height} = Dimensions.get('window')
 const styles = StyleSheet.create({
   page: {
     flex: 1,
-    position:'relative'
+    position:'relative',
+    
   },
   container: {
     height: '100%',
     width: '100%',
     backgroundColor: 'transparent',
   },
+  Container: {
+    ...StyleSheet.absoluteFillObject,
+    flex: 1, 
+    justifyContent: "flex-end",
+    alignItems: "center",
+  },
   map: {
-    flex: 1,
+    ...StyleSheet.absoluteFillObject,
   },
   BottomPopUp:{
     position:'absolute',
@@ -77,9 +82,9 @@ const styles = StyleSheet.create({
     zIndex:1000
   },
   CriticalRate:{
-    width:20,
-    height:20,
-    borderRadius:20,
+    width:35,
+    height:35,
+    borderRadius:18,
     backgroundColor:"red",
     
   },
@@ -98,10 +103,34 @@ const styles = StyleSheet.create({
     height:40,
     width:50,
     backgroundColor:'red',
-    // position:'absolute',
-    // top:20,
-    // zIndex:1000,
-  }
+  },
+  calloutView:{
+    height:100,
+    width:130,
+    backgroundColor:'#fff',
+    alignItems:'center',
+    justifyContent:'center',
+    borderRadius:10
+
+  },
+  CalloutCountry:{
+    fontSize:18,
+    fontWeight:'bold',
+    color:'#000',
+    fontFamily:'Roboto-Medium'
+  },
+  CalloutCase:{
+    fontSize:16,
+    fontWeight:'bold',
+    color:'#000',
+    fontFamily:'Roboto-Medium'
+  },
+  plainView: {
+    width: 130,
+    height:80,
+   alignItems:"center",
+   justifyContent:"center"
+  },
 })
 const config={
   mass:1,
@@ -122,27 +151,19 @@ const Location = () => {
         recovered:item.recovered,
         lat:item.countryInfo.lat,
         long:item.countryInfo.long,
+        country:item.country,
       }))
      setData(country)
      setloading(false)
     }
-  getUser()
-  // ()=> getUser();
+  getUser(),
+  ()=> getUser();
   },[])
 
   const AnimatedTextInput=Animated.createAnimatedComponent(TextInput)
   const Open=useSharedValue(0)
-  const PopUp=useSharedValue(0)
-  const PopUpMenue=useCallback(()=>{
-   PopUp.value=!PopUp.value
-  },[PopUp.value])
-  const PopUpStyle=useAnimatedStyle(()=>{
-    return{
-      transform:[{
-        scale:PopUp.values?1:0
-      }]
-    }
-  })
+  const LocationDispatch=useDispatch();
+  const locationcountry=useSelector(selectLocationCountry)
   const onPress=useCallback(()=>{
     Open.value=!Open.value
   },[Open.value])
@@ -152,26 +173,23 @@ const Location = () => {
     }
   })
   const EditText=useCallback((text)=>{
-  },[])
-  Logger.setLogCallback(log => {
-    const { message } = log;
-    if (
-      message.match('Falling back to MGLIdeographsRasterizedLocally') ||
-      message.match('MapRenderer::onSurfaceCreated GlyphsRasterizationMode')||
-      message.match('Request failed due to a permanent error: Canceled') 
-    ) {
-      return true;
-    }
-    return false;
-  });
-  const [coordinates] = useState([90, 24]);
-  useEffect(()=>{
-    MapboxGL.setTelemetryEnabled(false);
+    LocationDispatch(setLocationCountry(text.nativeEvent.text))
   },[])
 
-  return (
-   
+  const LocationData=()=>{
+    "worklet";
+    let locationItem=[];
+    (data.map((item)=>{
+      (locationcountry===item.country)?
+      locationItem.push(item.cases,item.active,item.recovered,item.lat,item.long,item.country):null;
+    }
+    ))
+    return {cases:locationItem[0],active:locationItem[1],recovered:locationItem[2],lat:locationItem[3],long:locationItem[4],country:locationItem[5]};
     
+  }
+  const {cases,active,recovered,lat,long,country}=LocationData()
+
+  return (
     <View style={styles.page}>
     {
       loading?
@@ -179,7 +197,7 @@ const Location = () => {
       <Loading/>
       </View>
       :
-      <View >
+      <View style={styles.Container}>
         <View style={[styles.SearchbarList]}>
           <Animated.View style={[styles.SearchbarBottomview,SearchBarAnimation]}>
           <KeyboardAvoidingView behavior="height" style={styles.container}  >
@@ -197,36 +215,40 @@ const Location = () => {
           </View>
           </View>
       <BottomPopUp/>
-      <View style={styles.container}>
-        <MapboxGL.MapView
-        style={styles.map}  onPress={Keyboard.dismiss}>
-          <MapboxGL.Camera zoomLevel={4} centerCoordinate={coordinates} />
-          <View>
-            {
-              data.map((item,index)=>{
-                return( 
-
-                  <MapboxGL.MarkerView  key={index} id={"`${index}`"} coordinate={[item.long,item.lat]}>
-                  <View>
-                   <Animated.View style={[styles.PopUpMenueView,PopUpStyle]}>
-                  </Animated.View> 
-                  <Pressable onPress={PopUpMenue}>
-                  <View style={styles.CriticalRate}>
-                  </View>
-                  </Pressable>
-                  </View>
-                
-
-                  </MapboxGL.MarkerView>
-                )
-                
-              })
-            }
-           </View>
-        </MapboxGL.MapView>
-      </View>
-      </View>
-     }
+   
+      <MapView
+       onPress={Keyboard.dismiss}
+        style={styles.map}
+        region={{
+          latitude:lat,
+          longitude:long,
+          latitudeDelta: 0.01,
+          longitudeDelta: 0.01,
+        }}
+        
+        
+      >
+              <Marker
+              key={"l"}
+              coordinate={{
+                latitude:lat,
+                longitude:long,
+              }}
+              
+            >
+               <View style={styles.CriticalRate}>
+               </View>
+               <Callout>
+              <View style={styles.plainView}>
+                <Text style={styles.CalloutCountry}>{country}</Text>
+                <Text style={styles.CalloutCase} >Active: {active}</Text>
+              </View>
+            </Callout>
+           
+            </Marker>
+      </MapView>
+    </View>
+   }
     </View>
  
   );
@@ -259,13 +281,3 @@ export default Location
 //   })
 //  }
 
-
-
-
-
-{/* <MapboxGL.MarkerView children={index} key={index} coordinate={[item.long,item.lat]} id={"test"}  >
-<View style={styles.CriticalRate} >
-</View>
- <MapboxGL.Callout
-  title={`${item.recovered}`}/>
-</MapboxGL.MarkerView> */}

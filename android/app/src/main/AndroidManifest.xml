@@ -1,21 +1,35 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.react__native__cli3">
+<manifest
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  package="com.react__native__cli3"
+>
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-      android:name=".MainApplication"
-      android:label="@string/app_name"
-      android:icon="@mipmap/ic_launcher"
-      android:roundIcon="@mipmap/ic_launcher_round"
-      android:allowBackup="false"
-      android:theme="@style/AppTheme">
+    android:name=".MainApplication"
+    android:label="@string/app_name"
+    android:icon="@mipmap/ic_launcher"
+    android:roundIcon="@mipmap/ic_launcher_round"
+    android:allowBackup="false"
+    android:theme="@style/AppTheme"
+  >
+       <meta-data
+      android:name="com.google.android.geo.API_KEY"
+      android:value="AIzaSyCUxo0eefJ5KPr7ly9Th3y3YWeQtQeHQDE"
+    />
+
+   <!-- You will also only need to add this uses-library tag -->
+   <uses-library
+      android:name="org.apache.http.legacy"
+      android:required="false"
+    />
       <activity
-        android:name=".MainActivity"
-        android:label="@string/app_name"
-        android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
-        android:launchMode="singleTask"
-        android:windowSoftInputMode="adjustResize">
+      android:name=".MainActivity"
+      android:label="@string/app_name"
+      android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
+      android:launchMode="singleTask"
+      android:windowSoftInputMode="adjustResize"
+    >
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
