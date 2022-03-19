@@ -65,6 +65,10 @@ const CovidUpdate = () => {
         recovered:item.recovered,
         critical:item.critical,
         deaths:item.deaths,
+        casesPerOneMillion:item.casesPerOneMillion,
+        deathsPerOneMillion:item.deathsPerOneMillion,
+        recoveredPerOneMillion:item.recoveredPerOneMillion,
+        criticalPerOneMillion:item.criticalPerOneMillion,
         
       }))
      setData(country)

@@ -101,6 +101,13 @@ const styles = StyleSheet.create({
     borderRadius:5,
     borderTopLeftRadius:70,
     borderTopRightRadius:70,
+  },
+  itemText:{
+    color:"white",
+    fontSize:16,
+    fontFamily:"sans-serif-medium",
+    marginTop:3,
+    marginLeft:5
   }
 })
 const config={
@@ -128,12 +135,12 @@ const DailyUpdate = ({item}) => {
     let data=[];
     (item.map((item)=>{
       (SearchCountry===item.country)?
-      data.push(item.flag,item.country,item.cases,item.recovered,item.deaths,item.critical,item.active):null;
+      data.push(item.flag,item.country,item.cases,item.recovered,item.deaths,item.critical,item.active,item.todayCases,item.todayDeaths,item.todayRecovered,item.casesPerOneMillion,item.deathsPerOneMillion,item.recoveredPerOneMillion,item.criticalPerOneMillion):null;
     }
     ))
-    return {data,name:data[1],cases:data[2],recovered:data[3],deaths:data[4],critical:data[5],active:data[6]};
+    return {data,name:data[1],cases:data[2],recovered:data[3],deaths:data[4],critical:data[5],active:data[6],todayCases:data[7],todayDeaths:data[8],todayRecovered:data[9],casesPerOneMillion:data[10],deathsPerOneMillion:data[11],recoveredPerOneMillion:data[12],criticalPerOneMillion:data[13]};
   }
-   const {data,name,cases,deaths,recovered,critical,active} =IData()
+   const {data,name,cases,deaths,recovered,critical,active,todayCases,todayDeaths,todayRecovered,casesPerOneMillion,deathsPerOneMillion,recoveredPerOneMillion,criticalPerOneMillion} =IData()
   return (
     <View>
       <Text style={styles.Header}>Current Outbreak</Text>
@@ -152,7 +159,6 @@ const DailyUpdate = ({item}) => {
           <AntDesign name='hearto' style={styles.Icon2} size={23}/>
         <Text style={styles.Text1}>Recovered</Text>
         <Text style={styles.Text2}>{recovered}</Text>
-
         </View>
       </View>
       <View style={styles.top2}>
@@ -160,7 +166,7 @@ const DailyUpdate = ({item}) => {
           <Entypo name='cross' style={styles.Icon1} size={23}/>
           <Text style={styles.Text1}>Deaths</Text>
         <Text style={styles.Text2}>{cases-(recovered+active)}</Text>
-
+        
         </View>
         <View style={styles.Report}>
           <Entypo name='warning' style={styles.Icon4} size={21}/>
@@ -170,9 +176,22 @@ const DailyUpdate = ({item}) => {
       
       </View>
       <Animated.View style={[styles.PopUpView,PopUpStyle]}>
-      <LinearGradient
-       start={{x: 1, y:0.5}} end={{x: 0.2, y: 0.9}}
-        colors={['#833ab4', '#ce2858', '#f1202c','#f1202c','#833ab4']} style={styles.gradient}/>
+         <LinearGradient
+         start={{ x: 0, y: 0 }}
+          end={{x: 1, y: 1 }}
+          colors={['#5851DB', '#C13584', '#E1306C', '#FD1D1D', '#F77737']}
+         style={styles.gradient}/>
+         <View style={{padding:30}}>
+         <Text style={styles.itemText}>TodayCases: {todayCases}</Text>
+         <Text style={styles.itemText}>TodayDeaths: {todayDeaths}</Text>
+         <Text style={styles.itemText}>TodayRecovered: {todayRecovered}</Text>
+         <Text style={styles.itemText}>CasesPerOneMillion: {casesPerOneMillion}</Text>
+         <Text style={styles.itemText}>RecoveredPerOneMillion: {recoveredPerOneMillion}</Text>
+         <Text style={styles.itemText}>DeathsPerOneMillion: {deathsPerOneMillion}</Text>
+         <Text style={styles.itemText}>CriticalPerOneMillion: {criticalPerOneMillion}</Text>
+
+         </View>
+       
         </Animated.View>
     </View>
   )

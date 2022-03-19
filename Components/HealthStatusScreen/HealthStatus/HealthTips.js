@@ -132,7 +132,7 @@ const HealthTips = () => {
     </GestureDetector>
     <GestureDetector gesture={gesture2}>
     <Animated.View style={[styles.ball2, animatedStyles2]} >
-     <Recovering/>
+     <Recovering y2={y2}/>
     </Animated.View>
     </GestureDetector>
    
