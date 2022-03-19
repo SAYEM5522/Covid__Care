@@ -49,6 +49,9 @@ const Home = () => {
   const onPress1=useCallback(()=>{
     navigation.navigate('InfectionTracker')
   },[])
+  const onPress2=useCallback(()=>{
+    navigation.navigate('IsolationTracker')
+  },[])
   return (
     <Animated.View style={[styles.Graph]}>
       <Pressable onPress={onPress}>
@@ -57,9 +60,14 @@ const Home = () => {
         </Text>
       </Pressable>
 
-      <Pressable onPress={onPress1}>
+      {/* <Pressable onPress={onPress1}>
         <Text style={{color:'white',top:20}} >
           InfectionTracker
+        </Text>
+      </Pressable> */}
+      <Pressable onPress={onPress2}>
+        <Text style={{color:'white',top:20}} >
+          IsolationTracker
         </Text>
       </Pressable>
      

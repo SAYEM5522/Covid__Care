@@ -4,7 +4,7 @@ const initialState = {
   country:"Bangladesh",
   data:[],
   Locationcountry:"Bangladesh",
-
+  time:null
 }
 const InTrackerSlice = createSlice({
   name: "InTrackerSlice",
@@ -19,6 +19,9 @@ const InTrackerSlice = createSlice({
     setData:(state,action)=>{
       state.data.push(action.payload);
     },
+    setTime:(state,action)=>{
+      state.time=action.payload;
+    },
     resetCount:(state,action)=>{
       state.TrackerCount=0;
     },
@@ -28,9 +31,10 @@ const InTrackerSlice = createSlice({
   }
 });
 
-export const {setCount,setCountry,setData,resetCount,setLocationCountry} = InTrackerSlice.actions
+export const {setCount,setCountry,setData,resetCount,setLocationCountry,setTime} = InTrackerSlice.actions
 export const selectCount=state=>state.Tracker.TrackerCount
 export const selectCountry=state=>state.Tracker.country
 export const selectData=state=>state.Tracker.data
 export const selectLocationCountry=state=>state.Tracker.Locationcountry
+export const selectTime=state=>state.Tracker.time
 export default InTrackerSlice.reducer

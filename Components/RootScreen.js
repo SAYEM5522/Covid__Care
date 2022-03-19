@@ -26,7 +26,7 @@ const authentication=false;
               <Stack.Screen name="Screen" component={Screen} options={{headerShown:false}} />
               {/* <Stack.Screen name="Authentication" component={Authentication} options={{headerShown:false,animation:"slide_from_right",presentation:'transparentModal'}} /> */}
               <Stack.Screen name="InfectionTracker" component={InfectionTracker} options={{headerShown:false}}  />
-              <Stack.Screen name="IsolationTracker" component={IsolationTracker} />
+              <Stack.Screen name="IsolationTracker" component={IsolationTracker} options={{headerShown:false}}  />
               <Stack.Screen name="Update" component={Update} options={{headerShown:false}} />
               {/* <Stack.Screen name="InfectionRate" component={InfectionRate} options={{headerShown:false,animation:"slide_from_right",presentation:'transparentModal'}} /> */}
               <Stack.Screen name="InfectionRatePage" component={InfectionRatePage} options={{headerShown:false}} />
