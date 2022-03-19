@@ -2,6 +2,7 @@ import { Dimensions, StyleSheet, Text, View,Image } from 'react-native'
 import React, { useEffect } from 'react'
 import { BarChart, LineChart } from 'react-native-chart-kit'
 import Ionicons from "react-native-vector-icons/Ionicons"
+import Entypo from "react-native-vector-icons/Entypo"
 const {width,height}=Dimensions.get('window');
 const styles = StyleSheet.create({
 
@@ -94,7 +95,7 @@ const Update = ({country,item}) => {
     return {data,name:data[1],cases:data[2],recovered:data[3],deaths:data[4],active:data[5]};
   }
    const {data,name,cases,deaths,recovered,active} =IData()
- 
+    
   return (
     <View style={styles.UpdateContaner}>
    
@@ -108,15 +109,16 @@ const Update = ({country,item}) => {
     
         </View>
         <Text style={styles.Caption}>Today's Information</Text>
-        <View>
-        <Text style={styles.CaptionText}>Deaths Rate {((deaths/cases)*100).toFixed(2)}% </Text>
+        <View style={styles.CaptionList}>
+        <Text style={styles.CaptionText}>Deaths Rate: {((((cases-(recovered+active)))/cases)*100).toFixed(2)}% </Text>
+        <Entypo name='warning'  style={styles.IconStyle} color="red" size={23}/>
         </View>
         <View style={styles.CaptionList}> 
-        <Text style={styles.CaptionText}>Recovered Rate {((recovered/cases)*100).toFixed(2)}% </Text>
+        <Text style={styles.CaptionText}>Recovered Rate: {((recovered/cases)*100).toFixed(2)}% </Text>
         <Ionicons style={styles.IconStyle} name='arrow-up' color="green" size={27}/>
         </View>
         <View style={styles.CaptionList}>
-        <Text style={styles.CaptionText}>Active Rate {((active/cases)*100).toFixed(2)}% </Text>
+        <Text style={styles.CaptionText}>Active Rate: {((active/cases)*100).toFixed(2)}% </Text>
         <Ionicons style={styles.IconStyle} name='arrow-down-outline' color="red" size={27}/>
 
         </View>

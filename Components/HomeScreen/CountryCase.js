@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux'
 import { setCountry } from '../features/InTrackerSlice'
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons"
 import { useNavigation } from '@react-navigation/native'
+import DailyUpdate from './DailyUpdate'
 const {width,height}=Dimensions.get("window")
 const styles = StyleSheet.create({
   SearchbarList:{
@@ -55,13 +56,14 @@ const config={
   restDisplacementThreshold:0.1,
   restSpeedThreshold:0.6
 }
-const CountryCase = () => {
+const CountryCase = ({item}) => {
   const navigation = useNavigation()
   const Open=useSharedValue(0)
   const Country=useDispatch();
   const onPress=useCallback(()=>{
     Open.value=!Open.value
   },[Open.value])
+  
   const SearchBarAnimation=useAnimatedStyle(()=>{
     return{
       width: withSpring(interpolate(Open.value,[0,1],[50,width-60],Extrapolate.CLAMP),config)
@@ -95,7 +97,7 @@ const CountryCase = () => {
       </View>
       <Pressable onPress={Keyboard.dismiss}>
       <View style={{height:height-60}}>
-
+      <DailyUpdate item={item}/>
       </View>
       </Pressable>
      

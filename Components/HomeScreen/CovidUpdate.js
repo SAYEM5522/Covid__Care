@@ -63,6 +63,8 @@ const CovidUpdate = () => {
         cases:item.cases,
         active:item.active,
         recovered:item.recovered,
+        critical:item.critical,
+        deaths:item.deaths,
         
       }))
      setData(country)
@@ -111,7 +113,7 @@ const CovidUpdate = () => {
         :
      <>
         <View style={styles.View1}>
-        <CountryCase/>
+        <CountryCase item={data} />
         </View> 
         <View>
         <GestureDetector gesture={gesture1}>
