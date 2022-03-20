@@ -24,6 +24,20 @@ const PreventationData=[
     description:"Get vaccinated as soon as it's your turn and follow local guidance on vaccination."
   }
 ]
+const Prevention2=[
+  {
+    id:1,
+    des:"Stay home when you are sick."
+  },
+  {
+    id:2,
+    des:"Avoid touching your eyes, nose and mouth."
+  },
+  {
+    id:3,
+    des:"Stay aware of travel guidelines."
+  }
+]
 const styles = StyleSheet.create({
   Header:{
     fontSize:20,
@@ -41,6 +55,9 @@ const styles = StyleSheet.create({
   },
   Des:{
     color:"white",paddingLeft:10,fontWeight:"700"
+  },
+  Round:{
+    width:10,height:10,borderRadius:5,backgroundColor:"white",
   }
 
 })
@@ -61,6 +78,16 @@ const Prevention = ({y1}) => {
                 <Text style={styles.ID}>{item.id}.</Text>
                 <Text style={styles.Type}>{item.type}</Text>
                 <Text style={styles.Des}>{item.description}</Text>
+              </View>
+            )
+          })
+        }
+        {
+          Prevention2.map((item,index)=>{
+            return(
+              <View key={index} style={{flexDirection:"row",alignItems:"center",marginLeft:20,marginTop:5}}>
+                <View style={styles.Round}/>
+                <Text style={styles.Des}>{item.des}</Text>
               </View>
             )
           })

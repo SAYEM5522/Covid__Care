@@ -13,10 +13,10 @@ function clamp(value, lowerBound, upperBound) {
 }
 const styles = StyleSheet.create({
   image:{
-    width:width,
-    height:height,
-    resizeMode:"cover",
-    position:"relative",
+    width:width/2,
+    height:height/1.5,
+    resizeMode:"contain",
+    marginTop:-50
     
   },
   ball:{
@@ -45,6 +45,22 @@ const styles = StyleSheet.create({
     position:"absolute",
     top:0,
     zIndex:1000
+  },
+  Caption:{
+    fontSize:30,
+    fontWeight:"bold",
+    color:"black",
+    marginLeft:20,
+    fontFamily:"sans-serif-medium",
+    fontStyle:"italic"
+
+  },
+  Caption2:{
+    fontSize:18,
+    fontWeight:"bold",
+    color:"black",
+    marginLeft:20,
+    fontFamily:"sans-serif-medium"
   }
 })
 const config={
@@ -58,7 +74,6 @@ const HealthTips = () => {
   const y1=useSharedValue(0);
   const y2=useSharedValue(0);
   const contex=useSharedValue(0);
-
   const gesture1 = Gesture.Pan()
   .onBegin(() => {
     contex.value = y1.value;
@@ -104,27 +119,24 @@ const HealthTips = () => {
      transform:[{
        translateY:clamp(y2.value,-(height-height/5),0)
      }],
-     width:interpolate(y2.value,[0,-100],[width-100,width],Extrapolate.CLAMP)
+     width:interpolate(y2.value,[0,-200],[width-100,width],Extrapolate.CLAMP)
 
     };
   });
 
-  const HeaderStyle=useAnimatedStyle(()=>{
-    return{
-      transform:[{
-        translateY:withSpring(interpolate(y1.value,[0,-(height-height/3.7)],[-70,0],Extrapolate.CLAMP),config)
-      }]
-    }
-  })
-
   return (
     <View > 
-      {/* <Image
-     source={{uri:"https://cdn.pixabay.com/photo/2020/11/02/19/52/doctor-5707722_960_720.jpg"}}
+      <View style={{flexDirection:"row",alignItems:"center",justifyContent:"space-between",marginTop:-50}}>
+        <View>
+        <Text style={styles.Caption}>Covid Care</Text>
+        <Text style={styles.Caption2}>Stay Safe, Stay Home</Text>
+        </View>
+      <Image
+     source={require('../../../Components/assets/doctor2.png')}
       style={styles.image}
-     /> */}
-     {/* <Animated.View style={[styles.HealthTipsHeader,HeaderStyle]}>
-     </Animated.View> */}
+     />
+      </View>
+    
      <GestureDetector gesture={gesture1}>
      <Animated.View style={[styles.ball, animatedStyles]} >
      <Prevention y1={y1}/>
