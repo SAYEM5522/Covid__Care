@@ -15,6 +15,8 @@ import CovidUpdate from './HomeScreen/CovidUpdate'
 import { enableFreeze } from 'react-native-screens';
 import InfectionRatePage from './HealthStatusScreen/InfectionTracker/InfectionRatePage'
 import IsoloationAdvice from './HealthStatusScreen/IsolationTracker/IsoloationAdvice'
+import YouTube from './YouTube/YouTube'
+import Vaccination from './Vaccination/Vaccination'
 enableFreeze(true);
 const RootScreen = () => {
 const Stack = createNativeStackNavigator();
@@ -32,6 +34,10 @@ const authentication=false;
               <Stack.Screen name="IsolationAdvice" component={IsoloationAdvice} options={{headerShown:false,animation:"slide_from_right",presentation:'transparentModal'}} />
               <Stack.Screen name="InfectionRatePage" component={InfectionRatePage} options={{headerShown:false}} />
               <Stack.Screen name="CovidUpdate" component={CovidUpdate} options={{headerShown:false}}/>
+              <Stack.Screen name="YouTube" component={YouTube} options={{headerShown:false,animation:"slide_from_right",presentation:'transparentModal'}}/>
+              <Stack.Screen name="Vaccination" component={Vaccination} options={{headerShown:false,animation:"slide_from_right",presentation:'transparentModal'}}/>
+
+
             </Stack.Navigator>
     </NavigationContainer>
     </Provider>

@@ -85,7 +85,9 @@ const styles = StyleSheet.create({
     width:35,
     height:35,
     borderRadius:18,
-    backgroundColor:"red",
+    backgroundColor:"rgba(255,0,0,0.5)",
+    borderWidth:3,
+    borderColor:"red",
     
   },
   center:{
@@ -105,8 +107,8 @@ const styles = StyleSheet.create({
     backgroundColor:'red',
   },
   calloutView:{
-    height:100,
-    width:130,
+    height:120,
+    width:140,
     backgroundColor:'#fff',
     alignItems:'center',
     justifyContent:'center',
@@ -114,13 +116,13 @@ const styles = StyleSheet.create({
 
   },
   CalloutCountry:{
-    fontSize:18,
+    fontSize:15,
     fontWeight:'bold',
     color:'#000',
     fontFamily:'Roboto-Medium'
   },
   CalloutCase:{
-    fontSize:16,
+    fontSize:15,
     fontWeight:'bold',
     color:'#000',
     fontFamily:'Roboto-Medium'
@@ -131,6 +133,7 @@ const styles = StyleSheet.create({
    alignItems:"center",
    justifyContent:"center"
   },
+
 })
 const config={
   mass:1,
@@ -242,6 +245,7 @@ const Location = () => {
               <View style={styles.plainView}>
                 <Text style={styles.CalloutCountry}>{country}</Text>
                 <Text style={styles.CalloutCase} >Active: {active}</Text>
+
               </View>
             </Callout>
            

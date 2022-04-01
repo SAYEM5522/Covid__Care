@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   },
   PopUpViewText:{
     color:"white",
-    fontSize:20,
+    fontSize:17,
     fontWeight:'bold',
     fontFamily:'sans-serif-condensed',
     paddingTop:(width/5.5)/3
@@ -85,13 +85,13 @@ const AnimatedIcon=Animated.createAnimatedComponent(Entypo)
  const PopUpAnimation=useAnimatedStyle(()=>{
    return{
       height:PopUp.value?withTiming(width/2):withTiming(PopUpheight),
-      width:PopUp.value?withTiming((width/2+15)):withTiming(PopUpWidth),
+      width:PopUp.value?withTiming((width/2+5)):withTiming(PopUpWidth),
      
    }
  })
  const iconAnimation=useAnimatedStyle(()=>{
    return{
-     left:PopUp.value?withTiming((width/2-PopUpWidth)+15):withTiming(0),
+     left:PopUp.value?withTiming((width/2-PopUpWidth)+5):withTiming(0),
      transform:[{
        rotate:PopUp.value?withTiming('45deg'):withTiming('0deg')
      }]

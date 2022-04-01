@@ -11,6 +11,24 @@ function clamp(value, lowerBound, upperBound) {
   'worklet';
   return Math.max(lowerBound, Math.min(value, upperBound));
 }
+const Prevention2=[
+  {
+    id:"1",
+    des:"Test To Prevent Spread To Others"
+  },
+  {
+    id:2,
+    des:"Wash Your Hands Regularly"
+  },
+  {
+    id:3,
+    des:"Use A Face Covering When Social Distance Is Not Possible "
+  },
+  {
+    id:4,
+    des:"Try To Keep Your Distance From Those Not In Your Household "
+  }
+]
 const styles = StyleSheet.create({
   image:{
     width:width/2,
@@ -61,6 +79,12 @@ const styles = StyleSheet.create({
     color:"black",
     marginLeft:20,
     fontFamily:"sans-serif-medium"
+  },
+  Des:{
+    color:"black",paddingLeft:10,fontWeight:"700"
+  },
+  Round:{
+    width:10,height:10,borderRadius:5,backgroundColor:"green",
   }
 })
 const config={
@@ -119,7 +143,7 @@ const HealthTips = () => {
      transform:[{
        translateY:clamp(y2.value,-(height-height/5),0)
      }],
-     width:interpolate(y2.value,[0,-200],[width-100,width],Extrapolate.CLAMP)
+     width:interpolate(y2.value,[0,-250],[width-100,width],Extrapolate.CLAMP)
 
     };
   });
@@ -136,7 +160,18 @@ const HealthTips = () => {
       style={styles.image}
      />
       </View>
-    
+      <View style={{marginTop:-100}}>
+      {
+          Prevention2.map((item,index)=>{
+            return(
+              <View key={index} style={{flexDirection:"row",alignItems:"center",marginLeft:20,marginTop:20}}>
+                <View style={styles.Round}/>
+                <Text style={styles.Des}>{item.des}</Text>
+              </View>
+            )
+          })
+        }
+        </View>
      <GestureDetector gesture={gesture1}>
      <Animated.View style={[styles.ball, animatedStyles]} >
      <Prevention y1={y1}/>
