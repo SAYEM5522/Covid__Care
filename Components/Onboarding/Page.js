@@ -57,7 +57,7 @@ const configaration={
 const Page = ({x,item,index}) => {
   const navigation = useNavigation()
   const onPress = useCallback(() => {
-    navigation.push("Authentication")
+    navigation.push("Screen")
   },[])
   const ImageStyle=useAnimatedStyle(()=>{
     return{

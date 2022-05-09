@@ -7,7 +7,7 @@ import IsolationTracker from './HealthStatusScreen/IsolationTracker/IsolationTra
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import InfectionRate from "../Components/HealthStatusScreen/InfectionTracker/InfectionRate"
 import Update from './HomeScreen/Update'
-import { Provider } from 'react-redux'
+import { Provider, useSelector } from 'react-redux'
 import store from './app/store'
 import Authentication from "../Components/Authentication/Authentication"
 import Onboarding from './Onboarding/Onboarding'
@@ -17,17 +17,21 @@ import InfectionRatePage from './HealthStatusScreen/InfectionTracker/InfectionRa
 import IsoloationAdvice from './HealthStatusScreen/IsolationTracker/IsoloationAdvice'
 import YouTube from './YouTube/YouTube'
 import Vaccination from './Vaccination/Vaccination'
+import { selectEmail } from './features/InTrackerSlice'
 enableFreeze(true);
 const RootScreen = () => {
 const Stack = createNativeStackNavigator();
 const authentication=false;
+const User=false
+// useSelector(selectEmail)
   return (
-    <Provider store={store}>
+    // <Provider store={store}>
     <NavigationContainer>
-          <Stack.Navigator >
-              {/* <Stack.Screen name="Onboarding" component={Onboarding} options={{headerShown:false}} /> */}
-              <Stack.Screen name="Screen" component={Screen} options={{headerShown:false}} />
-              {/* <Stack.Screen name="Authentication" component={Authentication} options={{headerShown:false,animation:"slide_from_right",presentation:'transparentModal'}} /> */}
+      {
+        // User ?
+          <Stack.Navigator  >
+            <Stack.Screen name="Onboarding" component={Onboarding} options={{headerShown:false}} />
+            <Stack.Screen name="Screen" component={Screen} options={{headerShown:false}} />
               <Stack.Screen name="InfectionTracker" component={InfectionTracker} options={{headerShown:false}}  />
               <Stack.Screen name="IsolationTracker" component={IsolationTracker} options={{headerShown:false}}  />
               <Stack.Screen name="Update" component={Update} options={{headerShown:false}} />
@@ -36,11 +40,28 @@ const authentication=false;
               <Stack.Screen name="CovidUpdate" component={CovidUpdate} options={{headerShown:false}}/>
               <Stack.Screen name="YouTube" component={YouTube} options={{headerShown:false,animation:"slide_from_right",presentation:'transparentModal'}}/>
               <Stack.Screen name="Vaccination" component={Vaccination} options={{headerShown:false,animation:"slide_from_right",presentation:'transparentModal'}}/>
-
-
             </Stack.Navigator>
+          //   :
+          //   <Stack.Navigator >
+          //   <Stack.Screen name="Onboarding" component={Onboarding} options={{headerShown:false}} />
+          //   <Stack.Screen name="Authentication" component={Authentication} options={{headerShown:false,animation:"slide_from_right",presentation:'transparentModal'}} />
+          // </Stack.Navigator>
+      }
+          {/* <Stack.Navigator >
+              <Stack.Screen name="Onboarding" component={Onboarding} options={{headerShown:false}} />
+              <Stack.Screen name="Screen" component={Screen} options={{headerShown:false}} />
+              <Stack.Screen name="Authentication" component={Authentication} options={{headerShown:false,animation:"slide_from_right",presentation:'transparentModal'}} />
+              <Stack.Screen name="InfectionTracker" component={InfectionTracker} options={{headerShown:false}}  />
+              <Stack.Screen name="IsolationTracker" component={IsolationTracker} options={{headerShown:false}}  />
+              <Stack.Screen name="Update" component={Update} options={{headerShown:false}} />
+              <Stack.Screen name="IsolationAdvice" component={IsoloationAdvice} options={{headerShown:false,animation:"slide_from_right",presentation:'transparentModal'}} />
+              <Stack.Screen name="InfectionRatePage" component={InfectionRatePage} options={{headerShown:false}} />
+              <Stack.Screen name="CovidUpdate" component={CovidUpdate} options={{headerShown:false}}/>
+              <Stack.Screen name="YouTube" component={YouTube} options={{headerShown:false,animation:"slide_from_right",presentation:'transparentModal'}}/>
+              <Stack.Screen name="Vaccination" component={Vaccination} options={{headerShown:false,animation:"slide_from_right",presentation:'transparentModal'}}/>
+            </Stack.Navigator> */}
     </NavigationContainer>
-    </Provider>
+    // </Provider>
   )
 }
 

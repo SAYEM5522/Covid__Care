@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     fontWeight:"bold",
     fontFamily:"sans-serif-medium",
     alignSelf:"center",
-    top:10
+    top:-5
   },
   BottomCaptonBox:{
     width:width/2,
@@ -125,7 +125,7 @@ const Vaccination = () => {
         <View style={styles.Graph}>
           <View style={{height:width/3,width:width-50,backgroundColor:"#ed254eff",alignSelf:"center",borderRadius:18,marginTop:-15,marginBottom:10}}>
           <Text style={styles.caption}>Vaccination</Text>
-            <View style={{flexDirection:"row",alignItems:"center",marginHorizontal:30,justifyContent:"space-between",marginTop:20,marginBottom:9}}>
+            <View style={{flexDirection:"row",alignItems:"center",marginHorizontal:30,justifyContent:"space-between",marginTop:2,marginBottom:9}}>
               <Text style={styles.country}>{text}</Text>
                 <AntDesign name='infocirlceo' color={"white"} size={26} />
             </View>

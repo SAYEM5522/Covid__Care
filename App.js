@@ -4,18 +4,21 @@ import {GestureHandlerRootView} from "react-native-gesture-handler"
 import Authentication from "./Components/Authentication/Authentication"
 import RootScreen from './Components/RootScreen';
 import SplashScreen from 'react-native-splash-screen'
-
+import { Provider } from 'react-redux'
+import store from './Components/app/store';
 const App = () => {
-  const authentication=true;
   useEffect(() => {
     SplashScreen.hide();
   },[])
   return (
+    <Provider store={store}>
+
     <GestureHandlerRootView style={styles.hello}>
       
         <RootScreen/>
       
     </GestureHandlerRootView>
+    </Provider>
   );
 };
 

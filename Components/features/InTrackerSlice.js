@@ -4,7 +4,10 @@ const initialState = {
   country:"Bangladesh",
   data:[],
   Locationcountry:"Bangladesh",
-  time:null
+  time:null,
+  name:"",
+  email:"",
+  ID:null
 }
 const InTrackerSlice = createSlice({
   name: "InTrackerSlice",
@@ -27,14 +30,23 @@ const InTrackerSlice = createSlice({
     },
     setLocationCountry:(state,action)=>{
       state.Locationcountry=action.payload;
+    },
+    setUser:(state,action)=>{
+      state.name=action.payload.name;
+      state.email=action.payload.email;
+      state.ID=action.payload.ID;
     }
+
   }
 });
 
-export const {setCount,setCountry,setData,resetCount,setLocationCountry,setTime} = InTrackerSlice.actions
+export const {setCount,setCountry,setData,resetCount,setLocationCountry,setTime,setUser} = InTrackerSlice.actions
 export const selectCount=state=>state.Tracker.TrackerCount
 export const selectCountry=state=>state.Tracker.country
 export const selectData=state=>state.Tracker.data
 export const selectLocationCountry=state=>state.Tracker.Locationcountry
 export const selectTime=state=>state.Tracker.time
+export const selectName=state=>state.Tracker.name
+export const selectEmail=state=>state.Tracker.email
+export const selectID=state=>state.Tracker.ID
 export default InTrackerSlice.reducer
